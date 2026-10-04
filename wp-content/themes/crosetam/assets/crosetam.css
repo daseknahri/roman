@@ -1,0 +1,134 @@
+/* ===== Fonts (self-hosted Fraunces for headings; Latin + Latin-extended for ă â î ș ț) ===== */
+@font-face{font-family:"Fraunces";src:url("__THEME__/assets/fonts/fraunces-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Fraunces";src:url("__THEME__/assets/fonts/fraunces-600-ext.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Fraunces";src:url("__THEME__/assets/fonts/fraunces-italic-500.woff2") format("woff2");font-weight:500;font-style:italic;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122,U+FEFF,U+FFFD}
+@font-face{font-family:"Fraunces";src:url("__THEME__/assets/fonts/fraunces-italic-500-ext.woff2") format("woff2");font-weight:500;font-style:italic;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+
+/* ===== Brand tokens (the parent theme is fully token-driven) ===== */
+:root{
+  --paper:#FBF6EF; --paper-soft:#F4EADD; --surface:#FFFFFF;
+  --ink:#2B211D; --muted:#6F625A;
+  --olive:#B5403A; --olive-dark:#8F2F2A; --copper:#B5403A; --clay:#8F2F2A; --sage:#F6E2DC;
+  --eyebrow:#A5382F; --line:#EADBCB; --ad-label:#8A7766;
+  --footer:#2B211D; --footer-ink:rgba(251,246,239,.84); --footer-hover:#F2C46D;
+  --hero-bg:#2B1A16; --hero-eyebrow:#F2C46D; --hero-rule:#B5403A; --on-dark:#FBF6EF;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --measure:700px;
+  --yarn:#F2C46D; --leaf:#4F7A64;
+  --cat-invata:#B5403A; --cat-casa:#4F7A64; --cat-jucarii:#B9772A; --cat-haine:#6E4C8C; --cat-bebe:#3E7CA6;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#17120F; --paper-soft:#201915; --surface:#271F1A;
+    --ink:#F3EAE0; --muted:#B6A797; --olive:#F08A7E; --olive-dark:#F6ABA1; --copper:#F08A7E; --clay:#F6ABA1;
+    --sage:#3A2421; --eyebrow:#F08A7E; --line:rgba(243,234,224,.12); --ad-label:#B6A797;
+    color-scheme:dark;
+  }
+  .custom-logo{content:url("__THEME__/assets/brand/logo-light.png")}
+}
+
+/* ===== Reading: tutorials read in a clean sans, headings in Fraunces ===== */
+body{font-family:var(--sans)}
+h1,h2,h3,.entry-title,.post-card__title,.site-brand__name,.home-hero__title{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+.entry-content{font-size:clamp(1.06rem,1rem + .3vw,1.15rem);line-height:1.75}
+.entry-content p{margin:0 0 1em}
+.entry-content h2{margin-top:2.2rem;padding-top:.2rem}
+.entry-content h2::before{content:"";display:block;width:56px;height:0;border-top:3px dashed var(--olive);margin-bottom:.7rem;opacity:.75}
+.entry-content h3{margin-top:1.5rem}
+.entry-content ol,.entry-content ul{padding-left:1.3em}
+.entry-content li{margin:.35em 0}
+.entry-content ol>li::marker{font-weight:700;color:var(--olive)}
+.entry-content ul>li::marker{color:var(--olive)}
+.entry-title{font-size:clamp(1.8rem,1.35rem + 2vw,2.6rem);line-height:1.15}
+.entry-excerpt{color:var(--muted);font-size:1.08rem}
+.vr-progress{background:var(--olive);height:3px}
+.content-layout--single-post>*{min-width:0}
+.entry{max-width:100%}
+.entry img,.entry iframe,.entry video,.entry figure{max-width:100%}
+.entry-title,.entry-content{overflow-wrap:break-word}
+.entry-featured-media img{border-radius:16px}
+
+/* Category colours */
+.content-chip,.topic-tile{--mood:var(--olive)}
+.cat-invata-sa-crosetezi,.category-invata-sa-crosetezi{--mood:var(--cat-invata)}
+.cat-casa-si-decor,.category-casa-si-decor{--mood:var(--cat-casa)}
+.cat-jucarii-si-martisoare,.category-jucarii-si-martisoare{--mood:var(--cat-jucarii)}
+.cat-haine-si-accesorii,.category-haine-si-accesorii{--mood:var(--cat-haine)}
+.cat-pentru-bebelusi-si-copii,.category-pentru-bebelusi-si-copii{--mood:var(--cat-bebe)}
+.post-card .content-chip{background:color-mix(in srgb,var(--mood) 12%,transparent);color:var(--mood);border-radius:999px;padding:.2em .7em;font-weight:600;font-size:.78rem}
+.post-card{border-radius:16px;overflow:hidden}
+.post-card__title{font-size:1.15rem;line-height:1.3}
+.post-card__media img{aspect-ratio:4/3;object-fit:cover}
+
+/* ===== Tutorial card (level / time / video) ===== */
+.cr-card{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;padding:0 !important;margin:0 0 1.6rem}
+.cr-card li{margin:0;display:flex;flex-direction:column;gap:.1rem;padding:.55rem .9rem;border-radius:12px;background:var(--paper-soft);border:1px solid var(--line);min-width:96px}
+.cr-card li::marker{content:none}
+.cr-card span{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cr-card strong{font-size:.98rem;color:var(--ink)}
+
+/* ===== Click-to-play YouTube ===== */
+.cr-video{position:relative;aspect-ratio:16/9;margin:1.4rem 0 .6rem;border-radius:16px;overflow:hidden;background:#000;box-shadow:var(--shadow)}
+.cr-video__btn{all:unset;cursor:pointer;display:block;width:100%;height:100%;position:relative}
+.cr-video__btn img{width:100%;height:100%;object-fit:cover;display:block;border-radius:0;opacity:.92;transition:opacity .2s}
+.cr-video__btn:hover img,.cr-video__btn:focus-visible img{opacity:1}
+.cr-video__btn:focus-visible{outline:3px solid var(--yarn);outline-offset:-3px}
+.cr-video__play{position:absolute;inset:0;display:grid;place-items:center}
+.cr-video__play svg{filter:drop-shadow(0 4px 14px rgba(0,0,0,.35));transition:transform .2s}
+.cr-video__btn:hover .cr-video__play svg{transform:scale(1.08)}
+.cr-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.wp-block-embed.is-provider-youtube{margin:0}
+
+/* ===== End of article ===== */
+.cr-end{margin:2.4rem 0 1rem;padding:1.5rem 1.4rem;border-radius:18px;background:var(--paper-soft);border:1px solid var(--line);text-align:center}
+.cr-end__mark{display:block;width:44px;height:44px;margin:0 auto .6rem;border-radius:10px}
+.cr-end__q{font-family:var(--serif);font-size:1.25rem;line-height:1.4;margin:0 0 1rem;color:var(--ink)}
+.cr-end__actions{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
+.cr-btn{display:inline-flex;align-items:center;gap:.45rem;border-radius:999px;padding:.75rem 1.15rem;font-weight:600;font-size:.96rem;text-decoration:none;border:0}
+.cr-btn--fb{background:#1877F2;color:#fff}
+.cr-btn--wa{background:#25D366;color:#073B1A}
+.cr-btn--pin{background:#E60023;color:#fff}
+.cr-btn:hover{filter:brightness(1.06);text-decoration:none}
+.cr-btn--fb:hover,.cr-btn--pin:hover{color:#fff}
+.cr-btn svg{width:18px;height:18px}
+.cr-next{display:grid;grid-template-columns:120px 1fr;gap:1rem;align-items:center;margin:1.6rem 0;padding:1rem;border-radius:18px;background:var(--surface);box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
+.cr-next:hover{box-shadow:var(--shadow-lift);text-decoration:none;color:var(--ink)}
+.cr-next img{width:120px;height:120px;object-fit:cover;border-radius:12px}
+.cr-next__eyebrow{font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--olive);display:inline-flex;align-items:center;gap:.3rem}
+.cr-next__title{display:block;font-family:var(--serif);font-size:1.2rem;line-height:1.3;margin-top:.25rem}
+
+/* ===== Sticky next-tutorial bar ===== */
+.cr-bar{position:fixed;left:12px;right:12px;bottom:calc(12px + var(--cr-anchor,0px));z-index:60;display:flex;align-items:center;gap:.7rem;padding:.6rem .7rem;border-radius:16px;background:#2B211D;color:#FBF6EF;box-shadow:0 14px 40px rgba(0,0,0,.28);text-decoration:none;transform:translateY(160%);transition:transform .35s ease}
+.cr-bar.is-on{transform:none}
+.cr-bar img{width:48px;height:48px;border-radius:10px;object-fit:cover;flex:none}
+.cr-bar__t{font-size:.86rem;line-height:1.25;flex:1;min-width:0}
+.cr-bar__t b{display:block;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--yarn)}
+.cr-bar__t span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#FBF6EF}
+.cr-bar__go{flex:none;width:36px;height:36px;border-radius:50%;background:#B5403A;display:grid;place-items:center;color:#fff}
+.cr-bar__x{flex:none;background:none;border:0;color:#cbb;font-size:1.3rem;line-height:1;padding:.2rem .3rem;cursor:pointer}
+@media (min-width:900px){.cr-bar{left:auto;right:24px;width:360px}}
+@media (prefers-reduced-motion:reduce){.cr-bar,.cr-video__btn img,.cr-video__play svg{transition:none}}
+
+/* Empty auto-ad slots collapse instead of leaving a blank band */
+.google-auto-placed:has(ins.adsbygoogle[data-ad-status="unfilled"]){display:none}
+
+/* ===== Phones ===== */
+@media (max-width:600px){
+  .vr-container{width:calc(100vw - 28px)}
+  .entry-title{font-size:1.7rem;line-height:1.2}
+  .entry-content{font-size:1.06rem}
+  .cr-video{border-radius:12px}
+  .cr-end{padding:1.2rem 1rem;margin-top:1.8rem}
+  .cr-end__actions{flex-direction:column}
+  .cr-btn{justify-content:center;width:100%;padding:.9rem 1rem;font-size:1rem}
+  .cr-next{grid-template-columns:88px 1fr;gap:.8rem;padding:.8rem}
+  .cr-next img{width:88px;height:88px}
+  .cr-next__title{font-size:1.05rem}
+  .sidebar .widget_search,.sidebar .search-form{display:none}
+}
+
+/* Phones: the back-to-top button moves up while the next-tutorial bar is showing, so they never overlap. */
+@media (max-width:899px){
+  body:has(.cr-bar.is-on) .vr-to-top{bottom:calc(92px + var(--cr-anchor,0px)) !important}
+}

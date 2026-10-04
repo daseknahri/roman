@@ -1,0 +1,383 @@
+# Romanian translation for Viral Reader.
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Viral Reader 1.9.29\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/theme\n"
+"Last-Translator: Croșetăm\n"
+"Language-Team: Romanian\n"
+"Language: ro_RO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2);\n"
+"X-Domain: viral-reader\n"
+
+msgid "Viral Reader"
+msgstr "Viral Reader"
+
+msgid "https://wa.me/212637122491"
+msgstr "https://wa.me/212637122491"
+
+msgid "A warm, editorial, mobile-first blog theme for long-form writing — cream \"paper\" palette, serif reading column with a sans UI, a cinematic hero, a sticky reading sidebar, quote/pull-quote styling, and ad-native spacing. Fast and light (system fonts, no jQuery, light mode). Pairs with the WP Automator Pro plugin: header/sidebar/footer ad zones and native in-content ad styling. English throughout."
+msgstr "O temă de blog caldă, editorială, gândită întâi pentru mobil, pentru texte lungi — paletă crem de „hârtie”, coloană de citire cu serif și interfață sans, un hero cinematic, o bară laterală lipicioasă de citire, stiluri pentru citate și spațiere pregătită pentru reclame. Rapidă și ușoară (fonturi de sistem, fără jQuery, mod luminos). Funcționează împreună cu pluginul WP Automator Pro: zone de reclame în antet, bara laterală și subsol, plus stilizare nativă a reclamelor din conținut."
+
+msgid "Oussama Hamri"
+msgstr "Oussama Hamri"
+
+msgid "Page not found"
+msgstr "Pagina nu a fost găsită"
+
+msgid "The page you were looking for isn't here. Try a search, or head back to the homepage."
+msgstr "Pagina pe care o căutai nu se află aici. Încearcă o căutare sau întoarce-te la prima pagină."
+
+msgid "Browse topics"
+msgstr "Răsfoiește temele"
+
+msgid "Or browse a topic"
+msgstr "Sau alege o temă"
+
+msgid "Back to homepage"
+msgstr "Înapoi la prima pagină"
+
+msgid "Nothing here yet"
+msgstr "Încă nu e nimic aici"
+
+msgid "There are no stories in this section right now. Try a search or head back home."
+msgstr "Momentan nu există tutoriale în această secțiune. Încearcă o căutare sau întoarce-te acasă."
+
+msgid "Back home"
+msgstr "Înapoi acasă"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "Read the full bio"
+msgstr "Citește biografia completă"
+
+msgid "%s story"
+msgid_plural "%s stories"
+msgstr[0] "%s tutorial"
+msgstr[1] "%s tutoriale"
+msgstr[2] "%s de tutoriale"
+
+msgid "No stories yet"
+msgstr "Încă niciun tutorial"
+
+msgid "This author hasn’t published anything yet."
+msgstr "Acest autor nu a publicat încă nimic."
+
+msgid "One response"
+msgstr "Un răspuns"
+
+msgid "%s response"
+msgid_plural "%s responses"
+msgstr[0] "%s răspuns"
+msgstr[1] "%s răspunsuri"
+msgstr[2] "%s de răspunsuri"
+
+msgid "Comments are closed."
+msgstr "Comentariile sunt închise."
+
+msgid "Leave a comment"
+msgstr "Lasă un comentariu"
+
+msgid "Explore"
+msgstr "Explorează"
+
+msgid "Information"
+msgstr "Informații"
+
+msgid "All rights reserved."
+msgstr "Toate drepturile rezervate."
+
+msgid "Read the story"
+msgstr "Citește tutorialul"
+
+msgid "Welcome"
+msgstr "Bun venit"
+
+msgid "Explore the topics"
+msgstr "Explorează temele"
+
+msgid "Browse"
+msgstr "Răsfoiește"
+
+msgid "Explore by topic"
+msgstr "Explorează pe teme"
+
+msgid "%d story"
+msgid_plural "%d stories"
+msgstr[0] "%d tutorial"
+msgstr[1] "%d tutoriale"
+msgstr[2] "%d de tutoriale"
+
+msgid "Fresh"
+msgstr "Proaspete"
+
+msgid "Latest stories"
+msgstr "Cele mai noi tutoriale"
+
+msgid "See all stories →"
+msgstr "Vezi toate tutorialele →"
+
+msgid "Primary Menu"
+msgstr "Meniu principal"
+
+msgid "Footer Menu"
+msgstr "Meniu din subsol"
+
+msgid "Home"
+msgstr "Acasă"
+
+msgid "Advertisement"
+msgstr "Reclamă"
+
+msgid "Link copied"
+msgstr "Link copiat"
+
+msgid "Copied"
+msgstr "Copiat"
+
+msgid "Copy this link:"
+msgstr "Copiază acest link:"
+
+msgid "Save"
+msgstr "Salvează"
+
+msgid "Save this image to Pinterest"
+msgstr "Salvează această imagine pe Pinterest"
+
+msgid "Image"
+msgstr "Imagine"
+
+msgid "Sidebar"
+msgstr "Bară laterală"
+
+msgid "Shown beside single posts (sticky on desktop)."
+msgstr "Afișată lângă articolele individuale (fixă pe desktop)."
+
+msgid "Header Ad"
+msgstr "Reclamă în antet"
+
+msgid "Full-width strip under the header, shown on posts, pages, and archives (not the front page, where the hero occupies that space). Fallback if the plugin Header zone is empty."
+msgstr "Bandă pe toată lățimea, sub antet, afișată pe articole, pagini și arhive (nu și pe prima pagină, unde acest spațiu este ocupat de hero). Variantă de rezervă dacă zona Antet a pluginului este goală."
+
+msgid "%d min read"
+msgid_plural "%d min read"
+msgstr[0] "%d min de citit"
+msgstr[1] "%d min de citit"
+msgstr[2] "%d min de citit"
+
+msgid "Breadcrumb"
+msgstr "Traseu de navigare"
+
+msgid "Search"
+msgstr "Caută"
+
+msgid "Share on Facebook"
+msgstr "Distribuie pe Facebook"
+
+msgid "Share on WhatsApp"
+msgstr "Distribuie pe WhatsApp"
+
+msgid "Share by email"
+msgstr "Distribuie prin e-mail"
+
+msgid "Copy link"
+msgstr "Copiază linkul"
+
+msgid "Print"
+msgstr "Tipărește"
+
+msgid "Previous page"
+msgstr "Pagina anterioară"
+
+msgid "Next page"
+msgstr "Pagina următoare"
+
+msgid "Posts navigation"
+msgstr "Navigarea între articole"
+
+msgid "%d hr"
+msgid_plural "%d hr"
+msgstr[0] "%d h"
+msgstr[1] "%d h"
+msgstr[2] "%d h"
+
+msgid "%d min"
+msgid_plural "%d min"
+msgstr[0] "%d min"
+msgstr[1] "%d min"
+msgstr[2] "%d min"
+
+msgid "%s URL"
+msgstr "Adresa %s"
+
+msgid "Author profiles"
+msgstr "Profiluri de autor"
+
+msgid "Follow us on %s"
+msgstr "Urmărește-ne pe %s"
+
+msgid "Social profiles"
+msgstr "Profiluri sociale"
+
+msgid "Author photo"
+msgstr "Fotografia autorului"
+
+msgid "Photo (image URL or media ID)"
+msgstr "Fotografie (adresa imaginii sau ID media)"
+
+msgid "Overrides the Gravatar. Paste an image URL or a Media Library attachment ID; leave blank for the default."
+msgstr "Înlocuiește Gravatarul. Lipește adresa unei imagini sau ID-ul unui fișier din Biblioteca media; las-o goală pentru varianta implicită."
+
+msgid "Servings"
+msgstr "Porții"
+
+msgid "Prep"
+msgstr "Pregătire"
+
+msgid "Cook"
+msgstr "Gătire"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Ingredients"
+msgstr "Ingrediente"
+
+msgid "Instructions"
+msgstr "Instrucțiuni"
+
+msgid "Share this story"
+msgstr "Distribuie acest tutorial"
+
+msgid "Jump to section"
+msgstr "Sari la secțiune"
+
+msgid "Back to top"
+msgstr "Înapoi sus"
+
+msgid "Skip to content"
+msgstr "Sari la conținut"
+
+msgid "Primary"
+msgstr "Principal"
+
+msgid "Menu"
+msgstr "Meniu"
+
+msgid "Site options"
+msgstr "Opțiunile site-ului"
+
+msgid "Presentation choices for this site. Changes preview live; nothing is saved until you click Publish."
+msgstr "Alegeri de prezentare pentru acest site. Modificările se văd imediat în previzualizare; nimic nu se salvează până nu apeși Publică."
+
+msgid "What this site publishes"
+msgstr "Ce publică acest site"
+
+msgid "Sets the word used in buttons and headings, e.g. \"Read the recipe\", \"Latest recipes\", \"12 recipes\"."
+msgstr "Stabilește cuvântul folosit în butoane și titluri, de ex. „Citește rețeta”, „Cele mai noi rețete”, „12 rețete”."
+
+msgid "Stories"
+msgstr "Povești"
+
+msgid "Recipes"
+msgstr "Rețete"
+
+msgid "Articles"
+msgstr "Tutoriale"
+
+msgid "Homepage hero layout"
+msgstr "Aspectul secțiunii hero de pe prima pagină"
+
+msgid "Choose \"Photo above the headline\" when post images have text or collages printed on them, so the headline never sits on top of busy pictures."
+msgstr "Alege „Fotografia deasupra titlului” când imaginile articolelor au text sau colaje imprimate pe ele, astfel încât titlul să nu stea niciodată peste imagini încărcate."
+
+msgid "Headline over the photo"
+msgstr "Titlul peste fotografie"
+
+msgid "Photo above the headline"
+msgstr "Fotografia deasupra titlului"
+
+msgid "Photos on topic tiles"
+msgstr "Fotografii pe casetele temelor"
+
+msgid "When a category has no cover image of its own, its homepage tile uses the photo of its newest post instead of staying blank. (Category page headers stay plain, so their title is never printed over a busy photo.)"
+msgstr "Când o categorie nu are o imagine de copertă proprie, caseta ei de pe prima pagină folosește fotografia celui mai nou articol, în loc să rămână goală. (Antetele paginilor de categorie rămân simple, astfel încât titlul lor să nu fie tipărit niciodată peste o fotografie încărcată.)"
+
+msgid "Show the author name and photo on posts"
+msgstr "Afișează numele și fotografia autorului pe articole"
+
+msgid "Untick for a brand-voice site: posts then show only the date and reading time under the title."
+msgstr "Debifează pentru un site cu vocea brandului: articolele afișează atunci doar data și timpul de citire sub titlu."
+
+msgid "This site's own pages on social networks. Each address you fill in shows as an icon in the footer, so readers can follow you. Leave a box empty to hide that network."
+msgstr "Paginile proprii ale acestui site pe rețelele sociale. Fiecare adresă completată apare ca pictogramă în subsol, astfel încât cititorii să te poată urmări. Lasă o casetă goală pentru a ascunde acea rețea."
+
+msgid "%s page address"
+msgstr "Adresa paginii %s"
+
+msgid "No posts yet"
+msgstr "Încă nu există articole"
+
+msgid "There’s nothing here yet — check back soon."
+msgstr "Încă nu e nimic aici — revino în curând."
+
+msgid "Full Width"
+msgstr "Lățime completă"
+
+msgid "Pages:"
+msgstr "Pagini:"
+
+msgid "Search results for: %s"
+msgstr "Rezultatele căutării pentru: %s"
+
+msgid "%s result"
+msgid_plural "%s results"
+msgstr[0] "%s rezultat"
+msgstr[1] "%s rezultate"
+msgstr[2] "%s de rezultate"
+
+msgid "No results found"
+msgstr "Nu s-a găsit niciun rezultat"
+
+msgid "We couldn’t find anything for that search. Try different keywords."
+msgstr "Nu am găsit nimic pentru această căutare. Încearcă alte cuvinte-cheie."
+
+msgid "Search for:"
+msgstr "Caută:"
+
+msgid "Search…"
+msgstr "Caută…"
+
+msgid "Updated %s"
+msgstr "Actualizat la %s"
+
+msgid "Article context"
+msgstr "Contextul tutorialului"
+
+msgid "Written by"
+msgstr "Scris de"
+
+msgid "More stories by this author →"
+msgstr "Mai multe tutoriale de la acest autor →"
+
+msgid "Keep reading"
+msgstr "Continuă lectura"
+
+msgid "Post navigation"
+msgstr "Navigarea între articole"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Next"
+msgstr "Următor"
+
+msgid "Recent stories"
+msgstr "Tutoriale recente"
+
+msgid "Topics"
+msgstr "Teme"

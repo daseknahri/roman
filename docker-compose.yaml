@@ -1,0 +1,32 @@
+services:
+  wordpress:
+    build: .
+    restart: unless-stopped
+    environment:
+      - SERVICE_FQDN_WORDPRESS_80
+      - SITE_URL=${SITE_URL:-https://crosetam.getemoji.site}
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DB_USER=$SERVICE_USER_MYSQL
+      - WORDPRESS_DB_PASSWORD=$SERVICE_PASSWORD_MYSQL
+      - WP_ADMIN_USER=redactia
+      - WP_ADMIN_PASSWORD=$SERVICE_PASSWORD_WPADMIN
+      - WP_ADMIN_EMAIL=${WP_ADMIN_EMAIL:-daseknahri@gmail.com}
+      - ADSENSE_CLIENT=${ADSENSE_CLIENT:-ca-pub-6869205417923902}
+    volumes:
+      - wp-data:/var/www/html
+    depends_on:
+      - db
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=$SERVICE_USER_MYSQL
+      - MYSQL_PASSWORD=$SERVICE_PASSWORD_MYSQL
+      - MYSQL_ROOT_PASSWORD=$SERVICE_PASSWORD_MYSQLROOT
+    volumes:
+      - db-data:/var/lib/mysql
+volumes:
+  wp-data:
+  db-data:

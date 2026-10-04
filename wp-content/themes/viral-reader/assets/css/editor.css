@@ -1,0 +1,64 @@
+/*
+ * Block editor styles — mirror the front-end reading experience so authors edit
+ * what they publish. Registered via add_theme_support('editor-styles') +
+ * add_editor_style('assets/css/editor.css') in functions.php.
+ */
+:root{
+	--paper:#f6f2ea; --paper-soft:#efe6d8; --surface:#ffffff;
+	--ink:#1c1a14; --muted:#6a6353;
+	--olive-dark:#31351a; --copper:#b8532a; --clay:#a5451f;
+	--line:#ece3d5;
+	--serif:"Iowan Old Style","Palatino Linotype","Palatino",Georgia,"Times New Roman",serif;
+	--sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+
+.editor-styles-wrapper{
+	background:var(--paper);
+	color:var(--ink);
+	font-family:var(--serif);
+	font-size:18px;
+	line-height:1.72;
+}
+.editor-styles-wrapper .wp-block{max-width:680px}
+/* The front end caps wide/full to the 680px reading column on desktop (a sidebar
+   sits beside the article), so the editor mirrors that rather than promising a
+   1000px breakout it can't deliver. */
+.editor-styles-wrapper .wp-block[data-align="wide"]{max-width:680px}
+.editor-styles-wrapper .wp-block[data-align="full"]{max-width:none}
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6{
+	font-family:var(--serif);
+	font-weight:600;
+	line-height:1.12;
+	letter-spacing:-.01em;
+	color:var(--ink);
+}
+.editor-styles-wrapper h1{font-size:2.6rem}
+.editor-styles-wrapper h2{font-size:2rem;margin-top:1.5em}
+.editor-styles-wrapper h3{font-size:1.4rem;margin-top:1.4em}
+.editor-styles-wrapper h4{font-size:1.15rem}
+
+.editor-styles-wrapper a{color:var(--olive-dark);text-decoration:underline;text-underline-offset:2px}
+.editor-styles-wrapper a:hover{color:var(--clay)}
+.editor-styles-wrapper blockquote{border-left:3px solid var(--copper);padding-left:1.2em;color:var(--muted);font-style:italic}
+.editor-styles-wrapper :not(pre)>code{background:var(--paper-soft);padding:.12em .38em;border-radius:6px;font-size:.86em}
+.editor-styles-wrapper pre{background:var(--paper-soft);border-radius:10px}
+.editor-styles-wrapper hr{border:0;border-top:1px solid var(--line)}
+.editor-styles-wrapper table th{background:var(--paper-soft);font-family:var(--sans)}
+.editor-styles-wrapper .wp-block-button__link{background:var(--copper);color:#fff;border-radius:999px;font-family:var(--sans);font-weight:700}
+.editor-styles-wrapper .wp-block-button__link:hover{background:var(--clay)}
+.editor-styles-wrapper ::selection{background:rgba(184,83,42,.22)}
+
+/* Match the published entry title. */
+.editor-styles-wrapper .editor-post-title__input,
+.edit-post-visual-editor__post-title-wrapper .editor-post-title__input{
+	font-family:var(--serif);
+	font-weight:600;
+	letter-spacing:-.01em;
+	color:var(--ink);
+}

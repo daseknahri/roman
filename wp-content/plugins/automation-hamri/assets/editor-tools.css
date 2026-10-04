@@ -1,0 +1,64 @@
+/* WP Automator — Author Tools meta box */
+.wpap-ed { font-size: 13px; }
+.wpap-ed-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 2px 0 12px;
+}
+.wpap-ed-note { color: #646970; font-size: 12px; }
+.wpap-ed-actions .wpap-ed-note { flex-basis: 100%; }
+
+.wpap-ed-checklist {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px 10px;
+	padding: 10px 12px;
+	margin: 0 0 14px;
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+}
+.wpap-ed-score {
+	flex-basis: 100%;
+	font-weight: 600;
+	margin-bottom: 2px;
+}
+.wpap-ed-chk { white-space: nowrap; }
+.wpap-ed-chk.ok { color: #1a7f37; }
+.wpap-ed-chk.no { color: #8a8a8a; }
+
+.wpap-ed-grid p { margin: 0 0 12px; }
+.wpap-ed-grid label,
+.wpap-ed-controls label,
+.wpap-ed-details label { display: block; }
+.wpap-ed-grid strong { display: block; margin-bottom: 4px; }
+
+.wpap-ed-details {
+	margin: 4px 0 12px;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	padding: 8px 12px;
+	background: #fff;
+}
+.wpap-ed-details > summary {
+	cursor: pointer;
+	font-weight: 600;
+	margin: -8px -12px;
+	padding: 8px 12px;
+}
+.wpap-ed-details[open] > summary { margin-bottom: 8px; }
+.wpap-ed-details p { margin: 0 0 10px; }
+
+.wpap-ed-recipe-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+.wpap-ed-recipe-row label { display: inline-block; }
+
+.wpap-ed-controls { border-top: 1px solid #f0f0f1; padding-top: 8px; }
+.wpap-ed-controls select { min-width: 200px; }
+.wpap-ed-controls .wpap-ed-note { display: block; margin-top: 3px; }

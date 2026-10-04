@@ -1,0 +1,73 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"settings": {
+		"appearanceTools": true,
+		"useRootPaddingAwareAlignments": true,
+		"layout": {
+			"contentSize": "680px",
+			"wideSize": "680px"
+		},
+		"color": {
+			"custom": true,
+			"customDuotone": false,
+			"customGradient": false,
+			"defaultPalette": false,
+			"defaultGradients": false,
+			"palette": [
+				{ "slug": "ink", "name": "Ink", "color": "#1c1a14" },
+				{ "slug": "muted", "name": "Muted", "color": "#6a6353" },
+				{ "slug": "paper", "name": "Paper", "color": "#f6f2ea" },
+				{ "slug": "paper-soft", "name": "Paper Soft", "color": "#efe6d8" },
+				{ "slug": "surface", "name": "Surface", "color": "#ffffff" },
+				{ "slug": "olive", "name": "Olive", "color": "#4a5024" },
+				{ "slug": "olive-dark", "name": "Olive Dark", "color": "#31351a" },
+				{ "slug": "copper", "name": "Copper", "color": "#b8532a" },
+				{ "slug": "clay", "name": "Clay", "color": "#a5451f" },
+				{ "slug": "sage", "name": "Sage", "color": "#dbe0c8" }
+			]
+		},
+		"typography": {
+			"fluid": true,
+			"customFontSize": true,
+			"lineHeight": true,
+			"dropCap": true,
+			"fontFamilies": [
+				{
+					"slug": "serif",
+					"name": "Serif",
+					"fontFamily": "\"Iowan Old Style\",\"Palatino Linotype\",\"Palatino\",Georgia,\"Times New Roman\",serif"
+				},
+				{
+					"slug": "sans",
+					"name": "Sans",
+					"fontFamily": "system-ui,-apple-system,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif"
+				},
+				{
+					"slug": "mono",
+					"name": "Monospace",
+					"fontFamily": "ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+				}
+			],
+			"fontSizes": [
+				{ "slug": "small", "name": "Small", "size": "0.85rem" },
+				{ "slug": "medium", "name": "Medium", "size": "1.05rem" },
+				{ "slug": "large", "name": "Large", "size": "1.4rem" },
+				{ "slug": "x-large", "name": "Extra Large", "size": "2rem" }
+			]
+		},
+		"spacing": {
+			"units": [ "px", "em", "rem", "%", "vw" ],
+			"spacingSizes": [
+				{ "slug": "20", "name": "Small", "size": "1rem" },
+				{ "slug": "40", "name": "Medium", "size": "2rem" },
+				{ "slug": "60", "name": "Large", "size": "3.5rem" }
+			]
+		},
+		"blocks": {
+			"core/button": {
+				"border": { "radius": true }
+			}
+		}
+	}
+}

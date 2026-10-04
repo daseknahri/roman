@@ -1,0 +1,840 @@
+/*
+Theme Name: Viral Reader
+Theme URI: https://wa.me/212637122491
+Author: Oussama Hamri
+Author URI: https://wa.me/212637122491
+Description: A warm, editorial, mobile-first blog theme for long-form writing — cream "paper" palette, serif reading column with a sans UI, a cinematic hero, a sticky reading sidebar, quote/pull-quote styling, and ad-native spacing. Fast and light (system fonts, no jQuery, light mode). Pairs with the WP Automator Pro plugin: header/sidebar/footer ad zones and native in-content ad styling. English throughout.
+Version: 1.9.34
+Requires at least: 5.5
+Tested up to: 6.6
+Requires PHP: 7.2
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: viral-reader
+Tags: blog, news, two-columns, right-sidebar, custom-menu, custom-logo, featured-images, translation-ready, full-width-template
+*/
+
+/* ===== Tokens ===== */
+/* Refreshed "sharper warm editorial" palette + better system-font stacks
+   (Iowan/Palatino serif, system-ui sans) — more refined than Georgia/Arial and
+   still zero-download, so no speed cost on the 95%-mobile audience. */
+:root{
+  --paper:#f6f2ea; --paper-soft:#efe6d8; --surface:#ffffff;
+  --ink:#1c1a14; --muted:#6a6353;
+  --olive:#4a5024; --olive-dark:#31351a; --copper:#b8532a; --clay:#a5451f; --sage:#dbe0c8;
+  --eyebrow:#9a4a24; --line:#ece3d5; --ad-label:#7a5b34;
+  --footer:#1c1a14; --footer-ink:rgba(255,253,248,.82); --footer-hover:#f0b48c;
+  --hero-bg:#2a2016; --hero-eyebrow:#f2caa4; --hero-rule:#e08a4c; --on-dark:#fffdf8;
+  --shadow:0 10px 30px rgba(28,26,20,.06); --shadow-lift:0 18px 44px rgba(28,26,20,.11);
+  --radius:10px; --radius-sm:8px; --content:min(1120px, calc(100vw - 32px)); --measure:680px;
+  --serif:"Iowan Old Style","Palatino Linotype","Palatino",Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color-scheme:light;
+}
+
+/* ===== Cinematic skin (opt-in: add_filter('vr_skin','cinematic')) =====
+   A moody, film-forward dark palette — warm near-black grounds, warm off-white
+   reading ink, brightened copper accent. Pure token swap + a few dark-surface
+   fixes (hairline ring on media so bright images don't float, readable form
+   fields). The default light "paper" skin is untouched. Contrast checked:
+   ink #f2ece0 on paper #131110 ≈ 15:1; muted #a89e8b ≈ 6.6:1; links/eyebrow
+   copper tones clear 4.5:1. */
+body.vr-skin-cinematic{
+  --paper:#131110; --paper-soft:#1c1813; --surface:#211c16;
+  --ink:#f2ece0; --muted:#a89e8b;
+  --olive:#8b965a; --olive-dark:#e6c39a; --copper:#d0703f; --clay:#e78f52; --sage:#33372a;
+  --eyebrow:#e2965f; --line:rgba(240,230,214,.11); --ad-label:#b39a72;
+  --footer:#0e0c0b; --footer-ink:rgba(242,236,224,.80); --footer-hover:#e6a06a;
+  --hero-bg:#0f0c0a; --hero-eyebrow:#e6a06a; --hero-rule:#d0703f; --on-dark:#f5efe4;
+  --shadow:0 12px 34px rgba(0,0,0,.48); --shadow-lift:0 22px 56px rgba(0,0,0,.62);
+  color-scheme:dark;
+  background:var(--paper);
+}
+body.vr-skin-cinematic .post-card__media,
+body.vr-skin-cinematic .related-card__media,
+body.vr-skin-cinematic .entry-featured-media img,
+body.vr-skin-cinematic .home-hero{box-shadow:inset 0 0 0 1px rgba(240,230,214,.08)}
+body.vr-skin-cinematic .entry-content img{box-shadow:0 0 0 1px rgba(240,230,214,.07)}
+body.vr-skin-cinematic input,
+body.vr-skin-cinematic textarea,
+body.vr-skin-cinematic select{background:var(--paper-soft);color:var(--ink);border:1px solid var(--line)}
+body.vr-skin-cinematic input::placeholder,
+body.vr-skin-cinematic textarea::placeholder{color:var(--muted)}
+body.vr-skin-cinematic .vr-btn{box-shadow:0 8px 22px -8px rgba(208,112,63,.6)}
+
+/* ===== Base ===== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:16px;line-height:1.65;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;overflow-wrap:break-word;font-feature-settings:"kern","liga"}
+img,video{max-width:100%;height:auto}
+iframe{max-width:100%}
+a{color:var(--olive-dark);text-decoration:none}
+a:hover{color:var(--clay);text-decoration:underline}
+h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:600;line-height:1.12;letter-spacing:-.01em;color:var(--ink);margin:0 0 .5em;text-wrap:balance}
+h1{font-size:clamp(2rem,4.4vw,2.9rem)}
+h2{font-size:clamp(1.7rem,3.4vw,2.5rem)}
+h3{font-size:1.4rem}
+h4{font-size:1.15rem}
+h5{font-size:1rem;letter-spacing:0}
+h6{font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+p,ul,ol,figure,blockquote,table{margin:0 0 1.15em}
+blockquote{border-inline-start:3px solid var(--copper);margin-inline-start:0;padding-block:.5em;padding-inline:1.2em 0;color:var(--muted);font-size:1.12rem;font-style:italic}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em}
+pre{background:var(--paper-soft);padding:1em;border-radius:var(--radius);overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2em 0}
+table{border-collapse:collapse;width:100%;font-family:var(--sans);font-size:.95rem}
+th,td{border:1px solid var(--line);padding:.55em .7em;text-align:start}
+th{background:var(--paper-soft);font-weight:700}
+::selection{background:rgba(184,83,42,.22)}
+/* Solid, opaque focus ring. olive-dark clears 3:1 on the light paper/surface
+   palette; the two DARK surfaces (footer, hero) get a light ring below so the
+   indicator stays visible there too — WCAG 1.4.11 (Non-text Contrast) + 2.4.7. */
+:focus-visible{outline:3px solid var(--olive-dark);outline-offset:3px}
+.site-footer :focus-visible,.home-hero :focus-visible{outline-color:var(--on-dark)}
+
+/* sans UI bits */
+.eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--eyebrow);margin:0 0 .5em}
+.vr-btn{display:inline-block;font-family:var(--sans);font-weight:700;font-size:.92rem;letter-spacing:.02em;background:var(--copper);color:#fff;border:0;border-radius:999px;padding:.72em 1.4em;cursor:pointer;transition:background .15s,transform .15s,box-shadow .15s;box-shadow:0 6px 16px -6px rgba(184,83,42,.5)}
+.vr-btn:hover{background:var(--clay);color:#fff;text-decoration:none;transform:translateY(-1px);box-shadow:0 10px 22px -8px rgba(184,83,42,.55)}
+.vr-btn:active{transform:translateY(0);box-shadow:0 4px 10px -6px rgba(184,83,42,.5)}
+.vr-btn:disabled,.vr-btn[disabled]{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.screen-reader-text{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;word-wrap:normal!important}
+.vr-skip{position:absolute;inset-inline-start:-9999px;background:var(--olive);color:#fff;padding:.6em 1em;border-radius:0 0 8px 0;z-index:1000}
+.vr-skip:focus{inset-inline-start:0;top:0}
+
+/* ===== Layout ===== */
+.vr-container{width:var(--content);margin-inline:auto}
+.site-main{display:block}
+.section{padding:60px 0}
+.section--tight{padding:36px 0}
+
+/* ===== Reading progress ===== */
+/* Compositor-only transform (scaleX) instead of animating width: the rAF scroll
+   handler writes transform every frame, which the compositor handles without
+   layout/paint — smoother scroll + lower INP on the highest-traffic template. */
+.vr-progress{position:fixed;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:0 50%;background:linear-gradient(90deg,var(--olive),var(--copper));z-index:1200;will-change:transform}
+body.admin-bar .vr-progress{top:32px}
+
+/* ===== Back to top (single posts; vr_back_to_top) ===== */
+/* Facebook's in-app browser (the dominant referral surface) disables the OS
+   "tap the status bar to scroll to top" gesture, so long articles need an on-page
+   way up. Hidden until JS adds .is-visible past ~1.2 viewports; JS-off = no-op.
+   The safe-area inset keeps it clear of the iOS home indicator. */
+.vr-to-top{position:fixed;inset-block-end:calc(18px + env(safe-area-inset-bottom,0px));inset-inline-end:16px;width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-lift);color:var(--ink);display:none;align-items:center;justify-content:center;z-index:80;cursor:pointer;transition:color .15s,border-color .15s,transform .15s}
+.vr-to-top.is-visible{display:inline-flex}
+.vr-to-top:hover{border-color:var(--copper);color:var(--copper);text-decoration:none}
+.vr-to-top:active{transform:translateY(1px)}
+.vr-to-top svg{width:20px;height:20px}
+
+/* ===== Header ===== */
+/* Solid background (no backdrop-filter): a blurred sticky bar repaints its whole
+   region on every scroll frame, which visibly costs scroll smoothness / INP on
+   phones — where 95% of traffic is. An opaque paper bar looks the same and is
+   far cheaper. */
+.site-header{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:1px solid var(--line)}
+body.admin-bar .site-header{top:32px}
+.site-header__inner{display:flex;align-items:center;gap:18px;padding:12px 0}
+.site-brand{display:flex;align-items:center;gap:10px;min-width:0;flex-shrink:0;margin-inline-end:auto}
+.site-brand .custom-logo{max-height:42px;width:auto}
+.site-brand__name{font-family:var(--serif);font-size:1.3rem;font-weight:500;color:var(--ink);letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site-brand__name:hover{color:var(--ink);text-decoration:none}
+.site-nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:2px;margin:0;padding:0;font-family:var(--sans)}
+.site-nav a{display:block;padding:.5em .8em;border-radius:var(--radius-sm);color:var(--ink);font-weight:700;font-size:.9rem;transition:color .15s,background-color .15s}
+.site-nav a:hover{background:var(--paper-soft);color:var(--olive-dark);text-decoration:none}
+.site-nav .current-menu-item>a{color:var(--clay)}
+/* 1.9.31 sub-navigation: dropdowns, and a mega-menu when a sub-item has its own sub-items (.vr-mega). */
+.site-nav li{position:relative}
+.site-nav .menu-item-has-children>a::after{content:"";display:inline-block;width:.42em;height:.42em;margin-inline-start:.45em;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-.2em) rotate(45deg);opacity:.6}
+.site-nav .sub-menu .menu-item-has-children>a::after{display:none}
+.vr-subnav-toggle{display:none}
+@media(min-width:901px){
+  /* the nav sits at the header's end, so panels open toward the page (anchored at the item's end) */
+  .site-nav{position:relative}
+  .site-nav .sub-menu{display:none;position:absolute;top:100%;inset-inline-end:0;z-index:80;flex-direction:column;flex-wrap:nowrap;gap:0;min-width:220px;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-lift)}
+  .site-nav li:hover>.sub-menu,.site-nav li:focus-within>.sub-menu,.site-nav li.is-open>.sub-menu{display:flex}
+  .site-nav .sub-menu a{font-weight:600;white-space:nowrap}
+  .site-nav .vr-mega{position:static}
+  .site-nav .vr-mega>.sub-menu{display:none;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px 14px;width:min(900px,calc(100vw - 48px));padding:14px}
+  .site-nav .vr-mega:hover>.sub-menu,.site-nav .vr-mega:focus-within>.sub-menu,.site-nav .vr-mega.is-open>.sub-menu{display:grid}
+  .site-nav .vr-current-branch>a{color:var(--clay)}
+  .site-nav .vr-mega>.sub-menu>li>a{font-family:var(--serif);font-weight:500;font-size:1rem;color:var(--olive-dark);border-bottom:1px solid var(--line);border-radius:0;margin-bottom:4px}
+  .site-nav .vr-mega .sub-menu .sub-menu{display:flex;position:static;min-width:0;padding:0;border:0;box-shadow:none;background:none}
+  .site-nav .vr-mega .sub-menu .sub-menu a{font-weight:500;font-size:.88rem;padding:.35em .6em}
+}
+@media(max-width:900px){
+  .site-nav .sub-menu{display:none;padding-inline-start:14px;border-inline-start:2px solid var(--line);margin:0 0 6px 10px}
+  .site-nav li.is-open>.sub-menu{display:flex}
+  /* 1.9.33: the open menu is its own scroll panel (height set by JS to fit the screen); the page behind stays put */
+  body.nav-open{overflow:hidden}
+  body.nav-open .site-nav{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-bottom:16px}
+  .site-nav li{min-width:0}
+  .site-nav a{overflow-wrap:anywhere}
+  .site-nav li.is-open>a,.site-nav .vr-current-branch>a,.site-nav a[aria-current="page"]{color:var(--clay)}
+  .site-nav .sub-menu .sub-menu a{font-weight:500}
+  .site-nav .menu-item-has-children>a::after{display:none}
+  .site-nav .menu-item-has-children{display:grid;grid-template-columns:1fr auto;align-items:center}
+  .site-nav .menu-item-has-children>.sub-menu{grid-column:1 / -1}
+  .vr-subnav-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;border-radius:var(--radius-sm);background:none;color:var(--ink);cursor:pointer}
+  .vr-subnav-toggle::before{content:"";width:.5em;height:.5em;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .15s}
+  .site-nav li.is-open>.vr-subnav-toggle::before{transform:rotate(-135deg)}
+}
+.header-tools{display:flex;align-items:center;gap:8px}
+.header-search{position:relative}
+.header-icon{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:50%;color:var(--ink);background:var(--surface);transition:color .15s,background-color .15s,border-color .15s}
+.header-icon:hover{border-color:var(--copper);color:var(--copper);text-decoration:none}
+.header-icon:active{transform:scale(.94)}
+.header-icon svg{width:18px;height:18px}
+.header-search__form{position:absolute;inset-inline-end:0;top:calc(100% + 10px);width:min(340px,86vw);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-lift);padding:12px;display:none;z-index:70}
+.header-search.is-open .header-search__form{display:block}
+.nav-toggle{display:none;width:40px;height:40px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);cursor:pointer;transition:border-color .15s,transform .15s}
+.nav-toggle span{display:block;width:19px;height:2px;background:var(--ink);border-radius:2px;position:relative}
+.nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{transition:transform .2s ease,opacity .2s ease,background-color .2s ease}
+.nav-toggle span::before,.nav-toggle span::after{content:"";position:absolute;left:0;width:19px;height:2px;background:var(--ink);border-radius:2px}
+.nav-toggle span::before{top:-6px}.nav-toggle span::after{top:6px}
+.nav-toggle:hover{border-color:var(--copper)}
+.nav-toggle:hover span,.nav-toggle:hover span::before,.nav-toggle:hover span::after{background:var(--copper)}
+.nav-toggle:active{transform:scale(.96)}
+/* Hamburger morphs to an X when the menu is open — a clear "open" affordance. */
+body.nav-open .nav-toggle span{background:transparent}
+body.nav-open .nav-toggle span::before{top:0;transform:rotate(45deg)}
+body.nav-open .nav-toggle span::after{top:0;transform:rotate(-45deg)}
+@media(max-width:900px){
+  /* Let the header row wrap so the OPEN hamburger nav drops to its own full-width row
+     (the .site-nav order:5;width:100% below intends this; without flex-wrap it can't). */
+  .site-header__inner{flex-wrap:wrap}
+  /* A wide image logo must SHRINK beside the search/menu buttons, never push them onto a second row
+     (which made the sticky header ~130px taller on every page). */
+  .site-brand{flex:1 1 0;min-width:0}
+  .site-brand .custom-logo-link{display:block;min-width:0;max-width:100%}
+  .site-brand .custom-logo{max-width:100%;height:auto;max-height:36px}
+  .site-nav{display:none;order:5;width:100%}
+  body.nav-open .site-nav{display:block}
+  .site-nav ul{flex-direction:column}
+  .nav-toggle{display:inline-flex}
+  /* 44px tap targets across the whole tablet band, not just phones. */
+  .site-nav a{min-height:44px;display:flex;align-items:center;padding:.6em .9em}
+  .header-icon,.nav-toggle{width:44px;height:44px}
+}
+
+/* ===== Header ad strip (plugin zone) ===== */
+.vr-ad-strip{background:var(--paper-soft);border-bottom:1px solid var(--line)}
+.vr-ad-strip__inner{width:var(--content);margin-inline:auto;padding:12px 0;text-align:center}
+
+/* ===== Hero (front page) ===== */
+.home-hero{position:relative;overflow:hidden;background:var(--hero-bg);color:var(--on-dark);border-radius:var(--radius);margin:22px 0 0}
+.home-hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.home-hero__video{pointer-events:none;object-position:center}
+@media (prefers-reduced-motion:reduce){.home-hero__video{display:none}}
+/* Cinematic overlay: a deep warm wash on the left for crisp text contrast (matters
+   on bright phone screens outdoors, and guarantees ≥4.5:1 for the body/meta over
+   any image), plus a soft fade to paper at the base so the hero emerges from the page. */
+.home-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(94deg,rgba(20,15,9,.92),rgba(20,15,9,.6) 60%,rgba(20,15,9,.18)),linear-gradient(0deg,var(--paper),transparent 40%)}
+.home-hero__inner{position:relative;z-index:2;max-width:640px;padding:clamp(40px,7vw,96px) clamp(22px,4vw,56px)}
+.home-hero .eyebrow{color:var(--hero-eyebrow);display:inline-flex;align-items:center;gap:9px;margin-bottom:.7em}
+.home-hero .eyebrow::before{content:"";width:20px;height:2px;background:var(--hero-rule);border-radius:2px}
+.home-hero h1{color:var(--on-dark);font-size:clamp(2.15rem,5.2vw,3.8rem);line-height:1.05;letter-spacing:-.015em;margin:0 0 .4em;text-shadow:0 2px 30px rgba(0,0,0,.42)}
+.home-hero h1 a{color:inherit;text-decoration:none}
+.home-hero h1 a:hover{color:inherit;text-decoration:none;opacity:.92}
+.home-hero p{color:rgba(255,253,248,.92);font-size:1.08rem;line-height:1.55;max-width:46ch;margin:0 0 1.5em;text-wrap:pretty}
+.home-hero__meta{display:flex;align-items:center;gap:14px;font-family:var(--sans);font-size:.82rem;color:rgba(255,253,248,.82);margin:0 0 1.4em}
+.home-hero__meta span{display:inline-flex;align-items:center;gap:6px}
+.home-hero__meta svg{width:15px;height:15px;opacity:.85}
+.home-hero .vr-btn{display:inline-flex;align-items:center;gap:8px}
+.home-hero .vr-btn svg{width:16px;height:16px}
+
+/* ===== Category band ===== */
+.category-band{background:var(--paper-soft);border-block:1px solid var(--line)}
+.category-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.category-card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s,border-color .15s}
+.category-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);border-color:var(--copper);text-decoration:none}
+.category-card:active{transform:translateY(-1px)}
+.category-card .count{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--eyebrow)}
+.category-card h3{margin:.4em 0 .2em;font-size:1.18rem;display:flex;align-items:center;gap:8px;transition:color .16s}
+/* Hover: the topic name goes accent and a small arrow slides in — signals a
+   destination without a static rail cluttering the tile. */
+.category-card h3::after{content:"→";margin-inline-start:auto;font-weight:400;color:var(--copper);opacity:0;transform:translateX(-5px);transition:opacity .16s,transform .16s}
+.category-card:hover h3{color:var(--copper)}
+.category-card:hover h3::after{opacity:1;transform:translateX(0)}
+.category-card p{color:var(--muted);font-size:.9rem;line-height:1.45;margin:0}
+
+/* ===== Brand hero (front page, pre-content) ===== */
+.home-hero--brand{min-height:clamp(360px,54vh,540px);display:flex;align-items:center}
+.home-hero--brand .home-hero__inner{max-width:720px}
+.home-hero--brand h1{font-size:clamp(2.5rem,6.4vw,4.4rem)}
+/* Stacked hero (Customizer → Site options): photo ABOVE the headline, for sites whose post images carry
+   printed text/collages. Side-by-side card on wide screens. The pre-content brand hero is untouched. */
+body.vr-hero-stacked .home-hero:not(.home-hero--brand){background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow)}
+body.vr-hero-stacked .home-hero:not(.home-hero--brand)::after{display:none}
+body.vr-hero-stacked .home-hero:not(.home-hero--brand) .home-hero__img{position:static;display:block;width:100%;height:auto;aspect-ratio:16/10}
+body.vr-hero-stacked .home-hero:not(.home-hero--brand) .home-hero__inner{max-width:none;padding:clamp(22px,4vw,44px)}
+body.vr-hero-stacked .home-hero:not(.home-hero--brand) h1{color:var(--ink);text-shadow:none}
+body.vr-hero-stacked .home-hero:not(.home-hero--brand) p{color:var(--muted)}
+body.vr-hero-stacked .home-hero:not(.home-hero--brand) .home-hero__meta{color:var(--muted)}
+body.vr-hero-stacked .home-hero:not(.home-hero--brand) .eyebrow{color:var(--eyebrow)}
+body.vr-hero-stacked .home-hero:not(.home-hero--brand) .eyebrow::before{background:var(--copper)}
+body.vr-hero-stacked .home-hero :focus-visible{outline-color:var(--copper)}
+@media (min-width:900px){
+  body.vr-hero-stacked .home-hero:not(.home-hero--brand){display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center}
+  body.vr-hero-stacked .home-hero:not(.home-hero--brand) .home-hero__img{aspect-ratio:4/3;max-height:480px}
+}
+
+/* ===== Topic tiles (cover-art category showcase) ===== */
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.topic-tile{position:relative;display:flex;min-height:236px;border-radius:var(--radius);overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s,border-color .18s}
+.topic-tile.has-cover{background-image:linear-gradient(180deg,rgba(13,11,9,.12),rgba(13,11,9,.6) 55%,rgba(13,11,9,.92)),var(--cover);background-size:cover;background-position:center;border-color:transparent}
+.topic-tile:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift);border-color:var(--copper);text-decoration:none}
+.topic-tile:active{transform:translateY(-1px)}
+.topic-tile:focus-within{border-color:var(--copper);box-shadow:var(--shadow-lift)}
+.topic-tile__body{position:relative;z-index:1;margin-top:auto;padding:20px 22px;display:flex;flex-direction:column;gap:6px;color:var(--ink)}
+.topic-tile.has-cover .topic-tile__body{color:#fff}
+.topic-tile__count{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--eyebrow)}
+.topic-tile.has-cover .topic-tile__count{color:var(--hero-eyebrow)}
+.topic-tile h3{margin:0;font-size:1.5rem;line-height:1.14;color:inherit}
+.topic-tile p{margin:0;font-size:.92rem;line-height:1.45;color:var(--muted)}
+.topic-tile.has-cover p{color:rgba(255,253,248,.86)}
+.topic-tile__cta{font-family:var(--sans);font-size:.8rem;font-weight:700;letter-spacing:.02em;color:var(--eyebrow);display:inline-flex;align-items:center;gap:6px;margin-top:4px;opacity:0;transform:translateY(4px);transition:opacity .18s,transform .18s}
+.topic-tile.has-cover .topic-tile__cta{color:var(--hero-eyebrow)}
+.topic-tile__cta svg{width:15px;height:15px}
+.topic-tile:hover .topic-tile__cta,.topic-tile:focus-within .topic-tile__cta{opacity:1;transform:translateY(0)}
+
+/* ===== Category cover hero (archive header) ===== */
+.category-hero{position:relative;overflow:hidden;border-radius:var(--radius);background-color:var(--hero-bg);background-image:var(--cover);background-size:cover;background-position:center;margin:22px 0 8px;min-height:clamp(230px,36vh,360px);display:flex;align-items:flex-end}
+.category-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,11,9,.22),rgba(13,11,9,.55) 55%,rgba(13,11,9,.9))}
+.category-hero__inner{position:relative;z-index:1;padding:clamp(24px,4vw,46px);max-width:760px;color:#fff}
+.category-hero__inner .vr-breadcrumbs,.category-hero__inner .vr-breadcrumbs a{color:rgba(255,253,248,.82)}
+.category-hero__inner .vr-breadcrumbs a:hover{color:#fff}
+.category-hero__inner .vr-breadcrumbs [aria-current="page"]{color:#fff}
+.category-hero h1{color:#fff;font-size:clamp(2rem,4.8vw,3.3rem);margin:0 0 .3em;text-shadow:0 2px 30px rgba(0,0,0,.42)}
+.category-hero__desc{color:rgba(255,253,248,.9);font-size:1.05rem;line-height:1.5;max-width:56ch}
+.category-hero__desc p{margin:0}
+
+/* 404 topic chips */
+.vr-404-topics{margin:1.6em 0 0}
+.vr-404-topics ul{list-style:none;margin:.4em 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.vr-404-topics a{display:inline-flex;align-items:center;min-height:40px;font-family:var(--sans);font-size:.9rem;font-weight:600;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.4em 1.1em;color:var(--ink);transition:color .15s,border-color .15s}
+.vr-404-topics a:hover{border-color:var(--copper);color:var(--copper);text-decoration:none}
+
+/* ===== Section heading ===== */
+.section-head{margin-bottom:26px;max-width:60ch}
+.section-head h2{margin:.1em 0 .2em}
+.section-head p{color:var(--muted)}
+.section-head--row{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;max-width:none}
+.section-head__more{font-family:var(--sans);font-size:.82rem;font-weight:700;letter-spacing:.02em;color:var(--olive-dark);white-space:nowrap;transition:color .15s}
+.section-head__more:hover{color:var(--copper)}
+
+/* ===== Post grid + cards ===== */
+.post-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:26px}
+.post-card{position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s,border-color .15s}
+.post-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);border-color:var(--copper)}
+.post-card:active{transform:translateY(-1px)}
+.post-card:focus-within{border-color:var(--copper);box-shadow:var(--shadow-lift)}
+.post-card__media{display:block;aspect-ratio:16/10;overflow:hidden;background:var(--paper-soft)}
+.post-card__media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.post-card:hover .post-card__media img{transform:scale(1.035)}
+.post-card__body{position:relative;padding:16px 18px 20px;display:flex;flex-direction:column;gap:8px}
+.content-chip-row{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:6px}
+.content-chip{font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.26em .6em;border-radius:999px;background:var(--sage);color:var(--olive-dark);transition:color .15s,background-color .15s}
+.content-chip--category{background:var(--copper);color:#fff}
+.content-chip--category:hover{background:var(--clay);color:#fff;text-decoration:none}
+.post-card__meta{font-family:var(--sans);font-size:.76rem;letter-spacing:.01em;color:var(--muted);margin-top:2px}
+.post-card__title{margin:0;font-size:1.26rem;line-height:1.2;letter-spacing:-.01em}
+.post-card__title a{color:var(--ink)}
+.post-card__title a:hover{color:var(--copper)}
+/* Whole-card click target (stretched link) — the excerpt/meta/whitespace all
+   navigate to the post, a bigger tap target for the mobile-first audience. The
+   category chip row is lifted above the overlay (z-index) so it stays clickable. */
+.post-card__title a::after{content:"";position:absolute;inset:0;z-index:1}
+.post-card__excerpt{color:var(--muted);font-size:.96rem;line-height:1.5;margin:0;text-wrap:pretty}
+/* Card category as a compact accent eyebrow (matches the single-post treatment;
+   cleaner than a filled pill in a dense grid). */
+.post-card .content-chip--category{background:none;color:var(--eyebrow);padding:0;font-size:.68rem;letter-spacing:.11em}
+.post-card .content-chip--category:hover{background:none;color:var(--copper);text-decoration:none}
+/* The card category eyebrow sits (z-index:2) above the whole-card stretched link
+   (z-index:1). With padding:0 its hit box was ~13px tall, so a near-miss tap fell
+   through to the card link. Give it a >=24px hit box (WCAG 2.5.8) without changing
+   its visual footprint: the negative block margin cancels the added height, so the
+   8px chip->title gap and title position stay identical on every breakpoint. */
+.post-card .content-chip--category{display:inline-flex;align-items:center;min-height:24px;padding-block:.5em;margin-block:-.5em}
+
+/* lead card on listings */
+.post-card.is-lead{grid-column:1/-1;flex-direction:row;align-items:stretch}
+.post-card.is-lead .post-card__media{flex:0 0 55%;aspect-ratio:16/9}
+.post-card.is-lead .post-card__body{justify-content:center;padding:24px 30px;gap:10px}
+.post-card.is-lead .post-card__title{font-size:clamp(1.55rem,2.7vw,2.1rem)}
+.post-card.is-lead .post-card__excerpt{font-size:1.03rem}
+@media(max-width:720px){.post-card.is-lead{flex-direction:column}.post-card.is-lead .post-card__media{flex:none;aspect-ratio:16/10}.post-card.is-lead .post-card__body{padding:16px 18px 20px}}
+
+/* ===== Archive / page headers ===== */
+.archive-header{padding:26px 0 6px;max-width:70ch}
+.archive-header h1{margin:.1em 0 .2em}
+.archive-header p{color:var(--muted)}
+.vr-breadcrumbs{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin-bottom:10px}
+.vr-breadcrumbs a{color:var(--muted);transition:color .15s}
+.vr-breadcrumbs a:hover{color:var(--clay)}
+.vr-breadcrumbs [aria-current="page"]{color:var(--ink)}
+.vr-breadcrumbs .sep{margin:0 6px;opacity:.6}
+
+/* ===== Author archive header ===== */
+.author-header{display:flex;gap:18px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin:18px 0 6px}
+.author-header__avatar{width:72px;height:72px;border-radius:50%;flex:none;background:var(--paper-soft)}
+.author-header__body{min-width:0}
+.author-header__eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--eyebrow);margin:0 0 3px}
+.author-header__name{font-family:var(--serif);font-size:1.7rem;margin:0 0 6px}
+.author-header__bio{font-family:var(--sans);font-size:.92rem;line-height:1.55;color:var(--muted);margin:0}
+.author-header__count{font-family:var(--sans);font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--eyebrow);margin:8px 0 0}
+.author-header__more{margin:6px 0 0;font-family:var(--sans);font-size:.86rem;font-weight:700}
+.author-header__more a{color:var(--eyebrow);transition:color .15s}
+.author-header__more a:hover{color:var(--copper)}
+.archive-header__intro{color:var(--muted);font-size:1.05rem;line-height:1.6;max-width:62ch;margin-top:.5em}
+.archive-header__intro p{margin:0 0 .6em}
+.archive-header__intro p:last-child{margin-bottom:0}
+
+/* ===== Single ===== */
+.content-layout--single-post{display:grid;grid-template-columns:minmax(0,var(--measure)) minmax(260px,320px);gap:56px;align-items:start;padding:26px 0 10px}
+/* Author box / related / post-nav / comments live below the article+sidebar grid.
+   Kept to the reading-column width on desktop so they align under the article and
+   comments keep a comfortable line length; full-width on phones. Putting them
+   below the grid is what lets the sidebar ad sit right after the article on
+   mobile (high viewability) instead of under the comments. */
+.single-extras{max-width:var(--measure);display:flex;flex-direction:column}
+/* Put the "Keep reading" related grid first — the highest-intent moment is where the article ends. */
+.single-extras .related-posts{order:1}
+.single-extras .author-box{order:2}
+.single-extras .post-navigation-simple{order:3}
+.single-extras .comments-area{order:4}
+.entry{min-width:0}
+.entry-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+/* On the single post, render the category as an eyebrow (accent rule + label)
+   rather than a filled pill — cleaner, more editorial. Cards keep the pill. */
+.entry-toolbar .content-chip--category{background:none;color:var(--eyebrow);padding:0;font-size:.72rem;letter-spacing:.12em;display:inline-flex;align-items:center;gap:8px;transition:color .15s}
+.entry-toolbar .content-chip--category:hover{background:none;color:var(--clay)}
+.entry-toolbar .content-chip--category::before{content:"";width:16px;height:2px;background:var(--copper);border-radius:2px}
+.entry-title{font-size:clamp(2.05rem,4.4vw,3rem);line-height:1.08;margin:.1em 0 .35em}
+.entry-excerpt{font-size:1.16rem;color:var(--muted);margin-bottom:1em;text-wrap:pretty}
+.entry-featured-media{margin:6px 0 18px}
+.entry-featured-media img{width:100%;border-radius:var(--radius);display:block}
+/* External-URL fallback images (no width/height) get a reserved aspect box so the single-post
+   LCP slot can't reflow. Local thumbnails carry .wp-post-image (already sized) and are left alone. */
+.entry-featured-media img:not(.wp-post-image){aspect-ratio:16/10;object-fit:cover}
+.entry-featured-media figcaption{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin-top:8px;text-align:center}
+/* Byline: avatar + author + date · read time in one clean row. */
+.entry-byline{display:flex;align-items:center;gap:11px;margin:0 0 18px}
+.entry-byline__avatar{width:40px;height:40px;border-radius:50%;flex:none;background:var(--paper-soft)}
+.entry-byline__text{display:flex;flex-direction:column;line-height:1.3;font-family:var(--sans);min-width:0}
+.entry-byline__name{font-size:.9rem;font-weight:700;color:var(--ink)}
+.entry-byline__name a{color:var(--ink);transition:color .15s}
+.entry-byline__name a:hover{color:var(--clay)}
+.entry-byline__meta{font-size:.8rem;color:var(--muted)}
+.entry-byline__updated{color:var(--eyebrow);font-weight:600}
+.share-tools{display:flex;gap:8px;margin:0 0 20px}
+.share-tools__button{position:relative;width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink);cursor:pointer;transition:color .15s,background-color .15s,border-color .15s}
+.share-tools__button:hover{border-color:var(--copper);color:var(--copper);text-decoration:none}
+.share-tools__button:active{transform:scale(.94)}
+.share-tools__button svg{width:17px;height:17px}
+/* Copy-link confirmation: a state color + a small tooltip (the JS toggles
+   .is-copied for ~1.5s and announces "Link copied" via an aria-live region). */
+.share-tools__button.is-copied{border-color:var(--olive);color:var(--olive);background:var(--sage)}
+/* End-of-article share row (vr_share_at_end) + long-post "Jump to section" TOC (vr_jump_to_section). */
+.share-tools--end{margin-top:2.2em;padding-top:1.4em;border-top:1px solid var(--line)}
+.vr-toc{margin:1.4em 0 1.6em;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:0 16px}
+.vr-toc__summary{cursor:pointer;list-style:none;padding:12px 0;min-height:44px;display:flex;align-items:center;font-family:var(--sans);font-weight:700;font-size:.88rem;letter-spacing:.02em;color:var(--olive-dark,#4a5a3a)}
+.vr-toc__summary::-webkit-details-marker{display:none}
+.vr-toc__summary::after{content:"\25be";margin-inline-start:auto;transition:transform .15s}
+.vr-toc[open] .vr-toc__summary::after{transform:rotate(180deg)}
+.vr-toc__list{list-style:none;margin:0;padding:0 0 10px}
+.vr-toc__list li{border-top:1px solid var(--line)}
+.vr-toc__list a{display:flex;align-items:center;min-height:44px;font-family:var(--sans);font-size:.88rem;color:var(--ink);text-decoration:none}
+.vr-toc__list a:hover{text-decoration:underline}
+.share-tools__button.is-copied::after{content:attr(data-copied);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--olive);color:#fff;font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.03em;padding:.3em .55em;border-radius:6px;white-space:nowrap;pointer-events:none;box-shadow:var(--shadow);z-index:3}
+.entry-content{font-size:1.05rem;line-height:1.72;font-feature-settings:"kern","liga","onum","pnum"}
+.entry-content>p:first-of-type{font-size:1.12rem}
+/* Editorial drop-cap: one accent initial opens the story. */
+.entry-content>p:first-of-type::first-letter{font-family:var(--serif);font-size:3.1rem;line-height:.82;font-weight:600;color:var(--copper);float:left;padding-block:.06em 0;padding-inline:0 .12em}
+/* Contain the float: if the first paragraph is a single short line (a one-line hook,
+   ~<45 chars at phone width) the 3.1rem glyph is taller than the line box and would
+   bleed into the next paragraph. This self-clearing box grows the paragraph to hold
+   it; invisible on the common multi-line case. */
+.entry-content>p:first-of-type::after{content:"";display:table;clear:both}
+.entry-content>*:first-child{margin-top:0}
+.entry-content h2{margin-top:1.5em;font-size:clamp(1.5rem,2.6vw,1.9rem)}
+.entry-content h3{margin-top:1.4em}
+.entry-content h4{margin-top:1.2em}
+.entry-content img{border-radius:var(--radius)}
+.entry-content p{text-wrap:pretty}
+.entry-content li{margin:.4em 0;text-wrap:pretty}
+.entry-content li>ul,.entry-content li>ol{margin:.3em 0 .2em}
+.entry-content :not(pre)>code{background:var(--paper-soft);padding:.12em .38em;border-radius:6px;font-size:.86em}
+.entry-content a{text-decoration:underline;text-underline-offset:2px;text-decoration-color:rgba(184,83,42,.5);overflow-wrap:anywhere}
+
+/* ===== Block content support (Gutenberg) ===== */
+.entry-content figure{margin-inline:0}
+.entry-content .alignleft{float:left;margin:.3em 1.4em 1.1em 0;max-width:48%}
+.entry-content .alignright{float:right;margin:.3em 0 1.1em 1.4em;max-width:48%}
+.entry-content .aligncenter{margin-inline:auto;display:block;text-align:center}
+/* The single-post layout reserves a sidebar column beside the article, so wide/full
+   blocks stay within the reading column on desktop (they'd otherwise collide with
+   the sidebar); the single-column tablet/mobile layout gives them the full width. */
+.entry-content .alignwide,.entry-content .alignfull{max-width:100%;margin-inline:0}
+/* Full-width page template (page-full-width.php): no sidebar, so keep a comfortable
+   reading measure but let wide/full blocks actually break out. */
+.vr-fullwidth .entry-content{max-width:820px;margin-inline:auto}
+.vr-fullwidth .entry-content .alignwide{max-width:min(1080px,calc(100vw - 32px));margin-inline:auto}
+.vr-fullwidth .entry-content .alignfull{max-width:100vw;width:100vw;margin-inline:calc(50% - 50vw)}
+.entry-content figcaption,.entry-content .wp-caption-text,.entry-content .wp-element-caption{font-family:var(--sans);font-size:.8rem;color:var(--muted);text-align:center;margin-top:8px}
+.wp-block-gallery,.entry-content .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:1.5em 0}
+.wp-block-gallery figure,.entry-content .gallery .gallery-item{margin:0}
+.wp-block-gallery img,.entry-content .gallery img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-sm)}
+.entry-content .wp-block-button__link{display:inline-block;font-family:var(--sans);font-weight:700;font-size:.92rem;letter-spacing:.02em;background:var(--copper);color:#fff;border-radius:999px;padding:.7em 1.4em;text-decoration:none;transition:background-color .15s}
+.entry-content .wp-block-button__link:hover{background:var(--clay);color:#fff}
+/* Quotes — long-form essays lean on quotations (dialogue, philosophers, book passages).
+   Match the generic blockquote for wp-block-quote, promote large/pullquotes to a centred
+   serif statement, and style <cite> attribution with an em-dash so a source reads clearly. */
+.entry-content .wp-block-quote{border-inline-start:3px solid var(--copper);margin-inline-start:0;padding-block:.5em;padding-inline:1.2em 0;color:var(--muted);font-size:1.12rem;font-style:italic}
+.entry-content .wp-block-quote.is-style-large,.entry-content .wp-block-pullquote{border-inline-start:0;border-block:2px solid var(--copper);margin-inline:0;padding:.9em 0;text-align:center;font-family:var(--serif);font-style:italic;font-size:clamp(1.35rem,3.4vw,1.75rem);line-height:1.32;color:var(--ink)}
+.entry-content .wp-block-pullquote p,.entry-content .wp-block-quote.is-style-large p{margin:0 0 .3em}
+.entry-content blockquote cite,.entry-content .wp-block-quote cite,.entry-content .wp-block-pullquote cite{display:block;font-family:var(--sans);font-style:normal;font-size:.85rem;letter-spacing:.02em;color:var(--muted);margin-top:.6em}
+.entry-content blockquote cite::before,.entry-content .wp-block-quote cite::before,.entry-content .wp-block-pullquote cite::before{content:"\2014\00a0"}
+/* Wide/many-column tables scroll inside their own box instead of widening the page. */
+.entry-content table{display:block;width:max-content;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+.entry-tags{font-family:var(--sans);margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.entry-tags a{display:inline-block;background:var(--paper-soft);border:1px solid var(--line);border-radius:999px;padding:.24em .8em;margin-block:0 7px;margin-inline:0 5px;font-size:.82rem;color:var(--ink);transition:color .15s,border-color .15s}
+.entry-tags a:hover{border-color:var(--clay);color:var(--clay);text-decoration:none}
+
+/* related + prev/next */
+.related-posts{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px}
+.related-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s,border-color .15s}
+.related-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.related-card:active{transform:translateY(-1px)}
+.related-card:focus-within{border-color:var(--copper);box-shadow:var(--shadow-lift)}
+.related-card__media{display:block;aspect-ratio:16/10;background:var(--paper-soft)}
+.related-card__media img{width:100%;height:100%;object-fit:cover;display:block}
+.related-card__body{padding:12px 14px 16px}
+.related-card h3{font-size:1rem;line-height:1.25;margin:.3em 0 0}
+.related-card h3 a{color:var(--ink)}
+.related-card h3 a::after{content:"";position:absolute;inset:0}
+.post-navigation-simple{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.post-navigation-simple__item{border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;background:var(--surface);transition:border-color .15s,background-color .15s,transform .15s}
+.post-navigation-simple__item:hover{border-color:var(--copper);background:var(--paper);text-decoration:none}
+.post-navigation-simple__item:active{transform:translateY(1px)}
+.post-navigation-simple__item--next{text-align:end}
+.post-navigation-simple__eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--eyebrow)}
+.post-navigation-simple strong{display:block;color:var(--ink);margin-top:4px;font-weight:500;transition:color .15s}
+.post-navigation-simple__item:hover strong{color:var(--copper)}
+
+/* ===== Author box ===== */
+.author-box{display:flex;gap:16px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px;margin-top:34px}
+.author-box__avatar{width:72px;height:72px;border-radius:50%;flex:none;background:var(--paper-soft)}
+.author-box__body{min-width:0}
+.author-box__eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--eyebrow);margin:0 0 3px}
+.author-box__name{font-family:var(--serif);font-size:1.3rem;color:var(--ink);margin:0 0 6px}
+.author-box__bio{font-family:var(--sans);font-size:.92rem;line-height:1.55;color:var(--muted);margin:0 0 8px}
+.author-box__link{font-family:var(--sans);font-size:.85rem;font-weight:700;color:var(--olive-dark);transition:color .15s}
+.author-box__link:hover{color:var(--copper);text-decoration:none}
+
+/* ===== Comments ===== */
+.comments-area{margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+.comments-title{font-family:var(--serif);font-weight:500;font-size:1.6rem;margin:0 0 20px}
+.comment-list{list-style:none;margin:0 0 8px;padding:0}
+.comment-list ol.children{list-style:none;margin:0;padding:0 0 0 clamp(14px,4vw,34px)}
+.comment-list li.comment{margin:0 0 18px}
+.comment-body{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;margin-bottom:14px}
+.comment-list .avatar{border-radius:50%;float:left;margin-block:0 6px;margin-inline:0 12px;background:var(--paper-soft)}
+.comment-author{font-family:var(--sans);font-size:.95rem}
+.comment-author .fn{font-weight:700;color:var(--ink);font-style:normal}
+.comment-author .fn a{color:var(--ink)}
+.comment-author .says{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.comment-metadata{font-family:var(--sans);font-size:.78rem;margin:2px 0 8px}
+.comment-metadata a{color:var(--muted);transition:color .15s}
+.comment-metadata a:hover{color:var(--copper)}
+.comment-content{clear:both;font-family:var(--serif);font-size:1rem;line-height:1.6;overflow-wrap:anywhere}
+.comment-content p:last-child{margin-bottom:0}
+.reply{font-family:var(--sans);font-size:.82rem}
+.comment-reply-link{display:inline-block;font-weight:700;color:var(--olive-dark);transition:color .15s}
+.comment-reply-link:hover{color:var(--copper);text-decoration:none}
+.comment-awaiting-moderation{font-family:var(--sans);font-size:.82rem;color:var(--eyebrow)}
+.bypostauthor>.comment-body{border-inline-start:3px solid var(--copper)}
+.pingback,.trackback{font-family:var(--sans);font-size:.9rem;padding:8px 0;border-bottom:1px solid var(--line);list-style:none}
+.comment-navigation{font-family:var(--sans);font-size:.85rem;margin:16px 0}
+/* Flex must sit on the inner .nav-links (the outer nav's only in-flow child is that
+   div; the SR heading is position:absolute), matching .vr-pagination .nav-links. */
+.comment-navigation .nav-links{display:flex;justify-content:space-between;gap:12px;width:100%}
+.comment-navigation a{font-weight:700;color:var(--olive-dark)}
+.no-comments{font-family:var(--sans);font-size:.9rem;color:var(--muted)}
+.comment-respond{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 22px 6px}
+.comment-reply-title{font-family:var(--serif);font-weight:500;font-size:1.35rem;margin:0 0 6px}
+.comment-reply-title small{font-family:var(--sans);font-size:.8rem;font-weight:400;margin-inline-start:10px}
+.comment-form,.comment-respond p{font-family:var(--sans);font-size:.9rem}
+.comment-notes,.logged-in-as{color:var(--muted);margin-bottom:14px}
+.comment-form label{display:block;font-weight:700;color:var(--ink);margin-bottom:5px}
+.comment-form input[type=text],.comment-form input[type=email],.comment-form input[type=url],.comment-form textarea{width:100%;padding:.7em .8em;border:1px solid var(--line);border-radius:var(--radius-sm);font:inherit;background:var(--paper);color:var(--ink);transition:border-color .15s}
+.comment-form input:focus,.comment-form textarea:focus{border-color:var(--copper)}
+.comment-form input::placeholder,.comment-form textarea::placeholder{color:var(--muted);opacity:1}
+.comment-form textarea{min-height:130px;font-family:var(--serif)}
+.comment-form-comment,.comment-form-author,.comment-form-email,.comment-form-url{margin-bottom:14px}
+.comment-form-cookies-consent{display:flex;align-items:flex-start;gap:8px}
+.comment-form-cookies-consent label{font-weight:400}
+.comment-form-cookies-consent input{margin-top:3px}
+.form-submit{margin:8px 0 16px}
+
+/* ===== Sidebar ===== */
+.sidebar{position:sticky;top:96px;font-family:var(--sans)}
+.sidebar__block{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:22px;box-shadow:var(--shadow)}
+.sidebar__title{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;padding-bottom:9px;border-bottom:2px solid var(--line)}
+.sidebar__list{list-style:none;margin:0;padding:0}
+.sidebar__list li{padding:8px 0;border-bottom:1px solid var(--line)}
+.sidebar__list li:last-child{border-bottom:0}
+.sidebar__list a{color:var(--ink);font-weight:700;font-size:.9rem;transition:color .15s}
+.sidebar__list a:hover{color:var(--copper)}
+.sidebar__list a:hover .t{color:var(--copper)}
+.sidebar__list a:visited .t{color:var(--muted)}
+.sidebar__recent{display:flex;gap:10px;align-items:flex-start}
+.sidebar__recent img{width:56px;height:56px;object-fit:cover;border-radius:var(--radius-sm);flex:none;background:var(--paper-soft);transition:transform .3s}
+.sidebar__recent:hover img{transform:scale(1.04)}
+.sidebar__recent .t{font-family:var(--serif);font-size:.95rem;line-height:1.3;color:var(--ink);transition:color .15s}
+
+/* ===== Ad slots (plugin .wpap-ad) ===== */
+.wpap-ad{margin:2.2rem auto;text-align:center;clear:both;overflow:hidden;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 14px;box-shadow:var(--shadow)}
+.wpap-ad:not(:has(.wpap-ad-label))::before{content:var(--vr-ad-label,"Advertisement");display:block;font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ad-label);font-weight:700;margin-bottom:6px}
+.wpap-ad .wpap-ad-label{display:block;font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ad-label);font-weight:700;margin-bottom:6px}
+.wpap-ad ins{margin:0 auto}
+.vr-ad-strip .wpap-ad{background:none;border:0;margin:0 auto;padding:0}
+/* CLS: hold space for known ad sizes so content doesn't jump when the ad loads.
+   Sidebar reserves a 300x250 medium rectangle; the header/footer strip a banner.
+   In-content ads are intentionally NOT reserved (responsive height -> whitespace). */
+.sidebar__block .wpap-ad{min-height:250px}
+.vr-ad-strip__inner{min-height:90px}
+/* Unfilled ad → hide its whole frame (card + "Advertisement" label, or the header strip) instead of leaving an
+   empty labelled box. Triggers only once the network says "no ad": Google Ad Manager collapses the slot div
+   (collapseEmptyDivs → display:none), AdSense marks the <ins> data-ad-status="unfilled". Browsers without :has()
+   simply keep the frame, as before. */
+.wpap-ad:has([id^="div-gpt-ad"][style*="display: none"]),.wpap-ad:has([id^="div-gpt-ad"][style*="display:none"]),.wpap-ad:has(ins.adsbygoogle[data-ad-status="unfilled"]),
+.vr-ad-strip:has([id^="div-gpt-ad"][style*="display: none"]),.vr-ad-strip:has([id^="div-gpt-ad"][style*="display:none"]),.vr-ad-strip:has(ins.adsbygoogle[data-ad-status="unfilled"]){display:none}
+/* Plugin article navigation (Automation Hamri "Our own buttons"): match the theme instead of the plugin's navy
+   default. Doubled class beats the plugin's <style>, which prints later in the article. */
+.wpap-nav .wpap-nav-btn.wpap-nav-btn{background:var(--copper);color:#fff;font-family:var(--sans);font-weight:700;border:2px solid var(--copper);border-radius:999px;box-shadow:0 6px 16px -6px rgba(184,83,42,.55)}
+.wpap-nav .wpap-nav-btn.wpap-nav-btn:hover,.wpap-nav .wpap-nav-btn.wpap-nav-btn:focus-visible{background:var(--clay);border-color:var(--clay);color:#fff}
+.wpap-nav .wpap-nav-prev.wpap-nav-prev{background:var(--surface);color:var(--copper);box-shadow:none}
+.wpap-nav .wpap-nav-prev.wpap-nav-prev:hover,.wpap-nav .wpap-nav-prev.wpap-nav-prev:focus-visible{background:var(--paper-soft);color:var(--clay)}
+/* Equal, full-width buttons at EVERY width (the plugin shrinks them to auto width on >=600px, which left two
+   small pills floating apart on desktop); never underlined; the spacer only kept Next right-aligned. */
+.wpap-nav.wpap-nav{gap:12px;justify-content:stretch}
+.wpap-nav .wpap-nav-btn.wpap-nav-btn{flex:1 1 0;min-width:0;min-height:54px;font-size:1.05rem;text-decoration:none}
+.wpap-nav .wpap-nav-btn.wpap-nav-btn:hover,.wpap-nav .wpap-nav-btn.wpap-nav-btn:focus,.wpap-nav .wpap-nav-btn span{text-decoration:none}
+.wpap-nav .wpap-nav-spacer{display:none}
+.wpap-nav-count{display:block;text-align:center;font-family:var(--sans);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 -.25rem}
+@media(max-width:640px){.vr-ad-strip__inner{min-height:100px}}
+
+/* ===== Related "You May Also Like" (plugin block) ===== */
+.wpap-related{margin-top:2.4rem;padding-top:1.3rem;border-top:1px solid var(--line)}
+.wpap-related-title{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin:0 0 1rem}
+.wpap-related-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1.1rem}
+.wpap-related-item a{display:block;color:inherit;text-decoration:none}
+.wpap-related-item img{width:100%;aspect-ratio:16/11;object-fit:cover;border-radius:6px;margin-bottom:.5rem;display:block}
+.wpap-related-item span{font-family:var(--serif);font-size:.95rem;line-height:1.3;color:var(--ink);display:block}
+.wpap-related-item a:hover span{color:var(--clay)}
+
+/* ===== Plugin front-end overrides (win over plugin's wp_head inline CSS) =====
+   The plugin prints a <style> on wp_head (priority 10, after the theme sheet),
+   so equal-specificity rules would lose. These `body`-prefixed selectors raise
+   specificity so the paper palette always wins, order-independently. */
+body .wpap-next-teaser{font-family:var(--sans);font-weight:700;font-size:1rem;text-align:center;color:var(--olive-dark);background:var(--paper-soft);border:1px solid var(--line);border-radius:var(--radius);margin:1.8rem 0 1rem;padding:.85rem 1.1rem;line-height:1.5}
+body .wpap-share-cta{font-family:var(--sans);font-weight:700;font-size:1.05rem;text-align:center;color:var(--clay);margin:2.2rem 0 .5rem;padding:1.2rem 1rem 0;border-top:2px solid var(--sage)}
+body .wpap-related-title{font-family:var(--serif);font-weight:500;font-size:1.5rem;color:var(--ink)}
+body .wpap-related-item img{height:auto;aspect-ratio:16/11;border-radius:6px}
+body .wpap-related-item span{font-family:var(--serif);font-size:.95rem;font-weight:400;color:var(--ink)}
+body .wpap-ad-label{color:var(--ad-label)}
+
+/* ===== Multi-page story nav (wp_link_pages; plugin makes paginated posts) ===== */
+.vr-page-links{font-family:var(--sans);font-weight:700;font-size:.9rem;margin:2.2rem 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:var(--muted)}
+.vr-page-links .post-page-numbers{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:.4em .78em;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);color:var(--ink);text-decoration:none;transition:color .15s,border-color .15s}
+.vr-page-links a.post-page-numbers:hover{border-color:var(--copper);color:var(--copper);text-decoration:none}
+.vr-page-links .post-page-numbers.current{background:var(--copper);color:#fff;border-color:var(--copper)}
+
+/* ===== Pagination ===== */
+/* paginate_links(type=list) emits <ul class="page-numbers"><li>… — reset that
+   actual markup (the older .nav-links selector never matched, so page numbers
+   rendered as a bulleted vertical list on every archive/search page). */
+.vr-pagination{margin:34px 0}
+.vr-pagination .nav-links,.vr-pagination ul.page-numbers{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:0;padding:0;list-style:none;font-family:var(--sans)}
+.vr-pagination li{margin:0}
+.vr-pagination a.page-numbers,.vr-pagination span.page-numbers,.vr-pagination .nav-links>a,.vr-pagination .nav-links>span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:.4em .7em;border:1px solid var(--line);border-radius:var(--radius-sm);font-weight:700;color:var(--ink);background:var(--surface)}
+.vr-pagination a{transition:color .15s,border-color .15s,background-color .15s}
+.vr-pagination .current,.vr-pagination span.page-numbers.current{background:var(--copper);color:#fff;border-color:var(--copper)}
+.vr-pagination a:hover{border-color:var(--copper);color:var(--copper);text-decoration:none}
+.vr-pagination a:active{transform:translateY(1px)}
+.vr-pagination .dots{border:0;background:none;min-width:auto;padding:0 .3em}
+/* The prev/next arrow glyph is a span INSIDE the link: never box it (it rendered as a box within a box). */
+.vr-pagination a span{display:inline;min-width:0;min-height:0;padding:0;border:0;background:none;font-size:1.25em;line-height:1}
+.vr-pagination span.page-numbers.dots{border:0;background:none;min-width:auto;padding:0 .2em}
+/* Phones: one tidy row. Drop the … and shrink the squares; on very small phones show only ‹ current ›. */
+@media(max-width:600px){.vr-pagination .nav-links,.vr-pagination ul.page-numbers{gap:5px;flex-wrap:nowrap}.vr-pagination li:has(> .dots){display:none}.vr-pagination a.page-numbers,.vr-pagination span.page-numbers{min-width:40px;min-height:44px;padding:.4em .45em}}
+@media(max-width:380px){.vr-pagination li:has(> a.page-numbers:not(.prev):not(.next)){display:none}.vr-pagination a.prev,.vr-pagination a.next{min-width:56px}}
+
+/* ===== Search form ===== */
+.vr-search{display:flex;gap:6px;font-family:var(--sans);max-width:420px}
+.vr-search input[type=search]{flex:1;padding:.65em .8em;border:1px solid var(--line);border-radius:var(--radius-sm);font:inherit;background:var(--surface);color:var(--ink);transition:border-color .15s}
+.vr-search input[type=search]:focus{border-color:var(--copper)}
+.vr-search input::placeholder{color:var(--muted);opacity:1}
+
+/* ===== Empty states (search / archive / index) ===== */
+.vr-empty{text-align:center;max-width:520px;margin:0 auto;padding:56px 0}
+.vr-empty h2{font-size:1.6rem;margin:0 0 .4em}
+.vr-empty p{color:var(--muted);margin:0 0 1.4em}
+.vr-empty .vr-search{margin:0 auto 1.2em}
+
+/* ===== Footer ===== */
+.site-footer{background:var(--footer);color:var(--footer-ink);margin-top:56px;position:relative}
+.site-footer::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--olive),var(--copper))}
+.site-footer__grid{width:var(--content);margin-inline:auto;padding:44px 0 30px;display:grid;grid-template-columns:1.25fr .8fr .8fr;gap:34px;font-family:var(--sans)}
+.site-footer__brand .n{font-family:var(--serif);font-size:1.35rem;color:#fff;display:block;margin-bottom:8px}
+.site-footer p{font-size:.9rem;line-height:1.6}
+.site-footer h2{font-family:var(--sans);font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#fff;margin:0 0 12px}
+.site-footer ul{list-style:none;margin:0;padding:0}
+.site-footer li{padding:5px 0}
+.site-footer a{color:var(--footer-ink);transition:color .15s}
+.site-footer a:hover{color:var(--footer-hover)}
+.site-footer__bottom{border-top:1px solid rgba(255,253,248,.14);text-align:center;font-family:var(--sans);font-size:.82rem;padding:16px 0;color:rgba(255,253,248,.72)}
+.site-footer__bottom a{color:rgba(255,253,248,.72)}
+.site-footer__bottom .sep{margin:0 8px;opacity:.5}
+
+/* ===== Responsive ===== */
+@media(max-width:1024px){
+  /* Collapse the single-post grid earlier and cap the stacked column to the
+     reading measure so lines never run the full container width. */
+  .content-layout--single-post{grid-template-columns:1fr;gap:30px}
+  .content-layout--single-post>.entry,.content-layout--single-post>.sidebar,.single-extras{max-width:var(--measure);margin-inline:auto;width:100%}
+  .sidebar{position:static}
+  .entry-content .alignfull{width:100%;max-width:100%}
+}
+@media(max-width:980px){
+  .site-footer__grid{grid-template-columns:1fr 1fr}
+}
+@media screen and (max-width:782px){
+  /* The WP admin bar is 46px (not 32px) at this width. */
+  body.admin-bar .site-header{top:46px}
+  body.admin-bar .vr-progress{top:46px}
+}
+@media(max-width:640px){
+  :root{--content:min(1120px, calc(100vw - 24px))}
+  .section{padding:44px 0}
+  .site-footer__grid{grid-template-columns:1fr}
+  .post-navigation-simple{grid-template-columns:1fr}
+  .section-head--row{flex-direction:column;align-items:flex-start;gap:6px}
+
+  /* CWV: reserve height for in-content ads on mobile so the article text doesn't
+     jump when an ad fills. Mobile in-article / responsive units are typically
+     ~250-300px tall; reserving 250 covers the common case (a taller unit shifts
+     only slightly). Desktop stays unreserved on purpose (wider, shorter units). */
+  .entry-content .wpap-ad{min-height:250px}
+
+  /* Hero: smaller + tighter on phones — quicker to paint (LCP), less scrolling
+     to reach the story. */
+  .home-hero{margin-top:14px}
+  .home-hero__inner{padding:30px 20px}
+  .home-hero h1{font-size:clamp(1.85rem,7vw,2.4rem);line-height:1.08}
+  .home-hero p{font-size:1rem;margin-bottom:1.1em}
+
+  /* Reading comfort on small screens. */
+  .entry-title{font-size:clamp(1.75rem,7vw,2.2rem)}
+  .entry-content{font-size:1.06rem}
+  .entry-content>p:first-of-type{font-size:1.1rem}
+
+  /* Bigger touch targets (Google recommends ~48px). */
+  .share-tools__button{width:44px;height:44px}
+  .header-icon,.nav-toggle{width:44px;height:44px}
+  .site-nav a{padding:.7em .8em}
+
+  /* Cards/grids to a single comfortable column. */
+  .post-grid{grid-template-columns:1fr;gap:20px}
+  .related-grid{grid-template-columns:1fr 1fr;gap:12px}
+
+  /* Homepage "Explore by topic" band -> horizontal swipe strip so the latest-posts grid
+     surfaces far sooner (stacked, all cards ran ~1.8 screens before the first article). */
+  .category-list{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;gap:12px;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .category-card{flex:0 0 78%;scroll-snap-align:start}
+
+  /* Full 44px tap targets for the stacked footer + sidebar-Topics link lists: the spacing lived
+     on the <li>, not the <a>, so the real hit area was only the ~20px text line-box. The inline
+     copyright link (.site-footer__bottom) and the thumbnail Recent-stories rows are left alone. */
+  .site-footer__explore li,.site-footer__info li{padding:0}
+  .site-footer__explore a,.site-footer__info a{display:flex;align-items:center;min-height:44px;padding:6px 0}
+  .sidebar__list li:not(:has(.sidebar__recent)){padding:0}
+  .sidebar__list a:not(.sidebar__recent){display:flex;align-items:center;min-height:44px;padding:6px 0}
+
+  /* Featured image: match the 16:10 crop used by cards/related so a PORTRAIT source
+     doesn't render ~2x tall (measured ~436px, ~53% of the viewport) above the first
+     line of body. Also crops the external (_wpap_image_url) fallback consistently.
+     Desktop keeps the native aspect (the :not(.wp-post-image) rule at ~line 265). */
+  .entry-featured-media img{aspect-ratio:var(--vr-featured-ratio,16/10);object-fit:cover;object-position:var(--vr-featured-pos,50% 50%)}
+
+  /* Keep a readable heading hierarchy on phones: the global H2 clamp floors near 1.5rem
+     while H3 stays 1.4rem, leaving almost no visual step for a multi-level essay outline.
+     Widen the gap so a reader can skim sections vs sub-points on a small screen. */
+  .entry-content h2{font-size:1.6rem}
+  .entry-content h3{font-size:1.2rem}
+
+  /* Remaining sub-44px tap targets → parity with the nav/share/footer targets above.
+     Breadcrumbs (were ~34x17), tag pills (~100x30), author-social pills (~30 tall),
+     and threaded-comment Reply / date links. Compact desktop rules are left intact. */
+  .vr-breadcrumbs{display:flex;flex-wrap:wrap;align-items:center;row-gap:2px}
+  .vr-breadcrumbs a{display:inline-flex;align-items:center;min-height:44px}
+  .entry-tags a{display:inline-flex;align-items:center;min-height:44px;padding-inline:1em}
+  .vr-author-social__link{display:inline-flex;align-items:center;min-height:44px;padding-inline:16px}
+  .comment-reply-link,.comment-metadata a{display:inline-flex;align-items:center;min-height:44px;padding-block:.35em}
+}
+@media(max-width:480px){
+  /* Essay/article titles need more width to read than short recipe titles; go single-column
+     on phones so "Keep reading" cards aren't squeezed to a ~170px unreadable column. */
+  .related-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+
+/* ===== Print ===== */
+@media print{
+  .site-header,.vr-ad-strip,.wpap-ad,.sidebar,.share-tools,.vr-progress,.vr-to-top,.site-footer,.comments-area,.post-navigation-simple,.related-posts,.nav-toggle,.vr-skip,.vr-breadcrumbs,.entry-tags,.header-search__form{display:none!important}
+  .content-layout--single-post{display:block}
+  .single-extras,.entry{max-width:100%}
+  .entry-content{font-size:12pt;line-height:1.55}
+  body{background:#fff;color:#000}
+  .entry-content a{text-decoration:underline;color:#000}
+  .entry-content a[href^="http"]::after{content:" (" attr(href) ")";font-size:.85em;color:#555}
+  /* Tables: the on-screen rule makes them horizontally scrollable (overflow-x:auto),
+     which CLIPS overflow on paper. Restore a normal wrapping table so no columns are lost. */
+  .entry-content table{display:table;width:100%;max-width:100%;overflow:visible;table-layout:fixed}
+  .entry-content th,.entry-content td{overflow-wrap:anywhere;word-break:break-word}
+  /* Fragmentation: don't orphan headings or split figures / the recipe card across pages. */
+  h1,h2,h3,h4{break-after:avoid;break-inside:avoid}
+  figure,img,.entry-featured-media,.vr-recipe-card,.vr-recipe-card__sec,tr{break-inside:avoid}
+  .entry-content p,.entry-content li{orphans:3;widows:3}
+}
+
+/* ── Recipe card (fed by WP Automator Pro recipe fields) ── */
+.vr-recipe-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:32px 0;box-shadow:var(--shadow)}
+.vr-recipe-card__title{font-size:1.5rem;margin:0 0 14px}
+.vr-recipe-card__meta{list-style:none;margin:0 0 18px;padding:0 0 16px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:22px}
+.vr-recipe-card__meta li{display:flex;flex-direction:column;gap:2px}
+.vr-recipe-card__k{font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--eyebrow)}
+.vr-recipe-card__v{font-size:1.05rem;color:var(--ink)}
+.vr-recipe-card__sec{margin-top:16px}
+.vr-recipe-card__sec h3{font-size:1.15rem;margin:0 0 .5em}
+.vr-recipe-card__ing{margin:0;padding-inline-start:1.3em}
+.vr-recipe-card__ing li{margin:.3em 0}
+.vr-recipe-card__steps{margin:0;padding-inline-start:1.4em}
+.vr-recipe-card__steps li{margin:.55em 0;padding-inline-start:.2em}
+@media(max-width:640px){.vr-recipe-card{padding:18px 16px}.vr-recipe-card__meta{gap:14px 20px}}
+.vr-author-social{list-style:none;display:flex;flex-wrap:wrap;gap:8px 10px;margin:.6em 0 0;padding:0}
+.vr-author-social__link{font-family:var(--sans);font-size:.8rem;font-weight:600;letter-spacing:.02em;color:var(--eyebrow,#6a6353);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 12px;line-height:1.7;transition:color .15s,border-color .15s}
+.vr-author-social__link:hover{color:var(--ink);border-color:var(--ink)}
+
+/* ===== RTL ===== */
+/* All directional LAYOUT above uses logical properties (inset/margin/padding/border
+   -inline, float:inline-start), so it flips automatically under dir="rtl". Only the
+   decorative arrow glyphs need mirroring for right-to-left locales. */
+[dir="rtl"] .category-card h3::after{content:"←";transform:translateX(5px)}
+[dir="rtl"] .category-card:hover h3::after{transform:translateX(0)}
+[dir="rtl"] .home-hero .vr-btn svg,[dir="rtl"] .post-navigation-simple svg{transform:scaleX(-1)}
+[dir="rtl"] .vr-breadcrumbs .sep{display:inline-block;transform:scaleX(-1)}
+/* Floats stay physical (float:left) for universal browser support; flip them here. */
+[dir="rtl"] .entry-content>p:first-of-type::first-letter,[dir="rtl"] .comment-list .avatar{float:right}

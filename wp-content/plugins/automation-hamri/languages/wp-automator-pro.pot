@@ -1,0 +1,222 @@
+# Copyright (C) 2026 Oussama Hamri
+# This file is distributed under the GPL-2.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: Automation Hamri 9.16.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-08-23T05:18:11+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: wp-automator-pro\n"
+
+#. Plugin Name of the plugin
+#: wp-automator-pro.php
+msgid "Automation Hamri"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: wp-automator-pro.php
+msgid "https://github.com/hamrioussama19-jpg"
+msgstr ""
+
+#. Description of the plugin
+#: wp-automator-pro.php
+msgid "An advanced AI-powered bulk content generator for WordPress that automates SEO articles, internal linking, and multi-engine image sourcing. Optimized for high-traffic niches."
+msgstr ""
+
+#. Author of the plugin
+#: wp-automator-pro.php
+msgid "Oussama Hamri"
+msgstr ""
+
+#. translators: %d: number of hours
+#: wp-automator-pro.php:5521
+#, php-format
+msgid "%d hr"
+msgid_plural "%d hr"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of minutes
+#: wp-automator-pro.php:5523
+#, php-format
+msgid "%d min"
+msgid_plural "%d min"
+msgstr[0] ""
+msgstr[1] ""
+
+#: wp-automator-pro.php:5602
+#: wp-automator-pro.php:6652
+msgid "Servings"
+msgstr ""
+
+#: wp-automator-pro.php:5603
+msgid "Prep"
+msgstr ""
+
+#: wp-automator-pro.php:5604
+msgid "Cook"
+msgstr ""
+
+#: wp-automator-pro.php:5605
+msgid "Total"
+msgstr ""
+
+#: wp-automator-pro.php:5617
+msgid "Ingredients"
+msgstr ""
+
+#: wp-automator-pro.php:5622
+msgid "Instructions"
+msgstr ""
+
+#: wp-automator-pro.php:5661
+msgid "You May Also Like"
+msgstr ""
+
+#: wp-automator-pro.php:5889
+msgid "Advertisement"
+msgstr ""
+
+#: wp-automator-pro.php:6595
+msgid "WP Automator — Author Tools"
+msgstr ""
+
+#: wp-automator-pro.php:6622
+msgid "Auto-fill empty fields"
+msgstr ""
+
+#: wp-automator-pro.php:6623
+msgid "Prepare for publishing"
+msgstr ""
+
+#: wp-automator-pro.php:6624
+msgid "Auto-fill only touches EMPTY fields — it never overwrites what you typed."
+msgstr ""
+
+#: wp-automator-pro.php:6631
+msgid "SEO title"
+msgstr ""
+
+#: wp-automator-pro.php:6635
+#: wp-automator-pro.php:6861
+msgid "Meta description"
+msgstr ""
+
+#: wp-automator-pro.php:6641
+msgid "Featured-image metadata"
+msgstr ""
+
+#: wp-automator-pro.php:6642
+msgid "Alt text"
+msgstr ""
+
+#: wp-automator-pro.php:6643
+#: wp-automator-pro.php:6859
+msgid "Title"
+msgstr ""
+
+#: wp-automator-pro.php:6644
+msgid "Caption"
+msgstr ""
+
+#: wp-automator-pro.php:6645
+msgid "Description"
+msgstr ""
+
+#: wp-automator-pro.php:6649
+msgid "Recipe details (adds Recipe rich-result schema)"
+msgstr ""
+
+#: wp-automator-pro.php:6650
+msgid "This post is a recipe"
+msgstr ""
+
+#: wp-automator-pro.php:6653
+msgid "Prep (min)"
+msgstr ""
+
+#: wp-automator-pro.php:6654
+msgid "Cook (min)"
+msgstr ""
+
+#: wp-automator-pro.php:6655
+msgid "Total (min)"
+msgstr ""
+
+#: wp-automator-pro.php:6657
+msgid "Ingredients (one per line)"
+msgstr ""
+
+#: wp-automator-pro.php:6658
+msgid "Steps (one per line)"
+msgstr ""
+
+#: wp-automator-pro.php:6659
+msgid "The Viral Reader theme shows a recipe card and emits matching Recipe schema (JSON-LD). Total auto-fills from prep + cook if left blank."
+msgstr ""
+
+#: wp-automator-pro.php:6664
+msgid "Split into pages"
+msgstr ""
+
+#: wp-automator-pro.php:6666
+msgid "Off — single page"
+msgstr ""
+
+#: wp-automator-pro.php:6667
+msgid "Smart (long posts only)"
+msgstr ""
+
+#: wp-automator-pro.php:6668
+msgid "2 pages"
+msgstr ""
+
+#: wp-automator-pro.php:6669
+msgid "3 pages"
+msgstr ""
+
+#: wp-automator-pro.php:6671
+msgid "Skipped if the post already has manual page breaks."
+msgstr ""
+
+#: wp-automator-pro.php:6673
+msgid "Auto-fill empty fields when I save"
+msgstr ""
+
+#: wp-automator-pro.php:6674
+msgid "Let WP Automator manage this post (SEO schema, related links, ad zones)"
+msgstr ""
+
+#: wp-automator-pro.php:6858
+msgid "ready"
+msgstr ""
+
+#: wp-automator-pro.php:6860
+msgid "Enough content"
+msgstr ""
+
+#: wp-automator-pro.php:6862
+msgid "Category"
+msgstr ""
+
+#: wp-automator-pro.php:6863
+msgid "Tags"
+msgstr ""
+
+#: wp-automator-pro.php:6864
+msgid "Featured image"
+msgstr ""
+
+#: wp-automator-pro.php:6865
+msgid "Image alt text"
+msgstr ""
+
+#: wp-automator-pro.php:6866
+msgid "Filled empty fields from the title and content."
+msgstr ""

@@ -1,0 +1,537 @@
+# Copyright (C) 2026 Oussama Hamri
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Viral Reader 1.9.29\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/theme\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-26T14:23:58+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: viral-reader\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Theme Name of the theme
+#: style.css
+msgid "Viral Reader"
+msgstr "Viral Reader"
+
+#. Theme URI of the theme
+#. Author URI of the theme
+#: style.css
+msgid "https://wa.me/212637122491"
+msgstr "https://wa.me/212637122491"
+
+#. Description of the theme
+#: style.css
+msgid "A warm, editorial, mobile-first blog theme for long-form writing — cream \"paper\" palette, serif reading column with a sans UI, a cinematic hero, a sticky reading sidebar, quote/pull-quote styling, and ad-native spacing. Fast and light (system fonts, no jQuery, light mode). Pairs with the WP Automator Pro plugin: header/sidebar/footer ad zones and native in-content ad styling. English throughout."
+msgstr "Ein warmes, redaktionelles Mobile-first-Blog-Theme für lange Beiträge — cremefarbene „Papier“-Palette, eine Serifen-Lesespalte mit klarer Sans-Serif-Bedienoberfläche, ein cineastischer Hero-Bereich, eine mitscrollende Lese-Seitenleiste, Zitat-/Pull-Quote-Gestaltung und werbefreundliche Abstände. Schnell und schlank (Systemschriften, kein jQuery, heller Modus). Lässt sich mit dem Plugin WP Automator Pro kombinieren: Anzeigenbereiche in Header, Seitenleiste und Footer sowie native Werbeflächen im Content. Durchgehend auf Englisch."
+
+#. Author of the theme
+#: style.css
+msgid "Oussama Hamri"
+msgstr "Oussama Hamri"
+
+#: 404.php:14
+msgid "Page not found"
+msgstr "Seite nicht gefunden"
+
+#: 404.php:15
+msgid "The page you were looking for isn't here. Try a search, or head back to the homepage."
+msgstr "Die Seite, die du suchst, gibt es hier nicht. Versuch es mit einer Suche oder geh zurück zur Startseite."
+
+#: 404.php:22
+msgid "Browse topics"
+msgstr "Themen durchstöbern"
+
+#: 404.php:23
+msgid "Or browse a topic"
+msgstr "Oder durchstöbere ein Thema"
+
+#: 404.php:31
+msgid "Back to homepage"
+msgstr "Zurück zur Startseite"
+
+#: archive.php:50
+msgid "Nothing here yet"
+msgstr "Hier gibt's noch nichts"
+
+#: archive.php:51
+msgid "There are no stories in this section right now. Try a search or head back home."
+msgstr "In diesem Bereich gibt es aktuell keine Beiträge. Versuch es mit einer Suche oder geh zurück zur Startseite."
+
+#: archive.php:53
+#: author.php:67
+#: index.php:44
+#: search.php:41
+msgid "Back home"
+msgstr "Zur Startseite"
+
+#: author.php:35
+msgid "Author"
+msgstr "Autor"
+
+#: author.php:44
+msgid "Read the full bio"
+msgstr "Ganze Bio lesen"
+
+#. translators: %s: number of stories
+#: author.php:47
+#, php-format
+msgid "%s story"
+msgid_plural "%s stories"
+msgstr[0] "%s Beitrag"
+msgstr[1] "%s Beiträge"
+
+#: author.php:65
+msgid "No stories yet"
+msgstr "Noch keine Beiträge"
+
+#: author.php:66
+msgid "This author hasn’t published anything yet."
+msgstr "Dieser Autor hat noch nichts veröffentlicht."
+
+#: comments.php:28
+msgid "One response"
+msgstr "Eine Antwort"
+
+#. translators: %s: comment count number.
+#: comments.php:32
+#, php-format
+msgid "%s response"
+msgid_plural "%s responses"
+msgstr[0] "%s Antwort"
+msgstr[1] "%s Antworten"
+
+#: comments.php:58
+msgid "Comments are closed."
+msgstr "Kommentare sind geschlossen."
+
+#: comments.php:69
+msgid "Leave a comment"
+msgstr "Kommentar hinterlassen"
+
+#: footer.php:37
+#: front-page.php:117
+msgid "Explore"
+msgstr "Entdecken"
+
+#: footer.php:50
+msgid "Information"
+msgstr "Informationen"
+
+#: footer.php:67
+msgid "All rights reserved."
+msgstr "Alle Rechte vorbehalten."
+
+#: front-page.php:51
+msgid "Read the story"
+msgstr "Beitrag lesen"
+
+#: front-page.php:67
+msgid "Welcome"
+msgstr "Willkommen"
+
+#: front-page.php:70
+msgid "Explore the topics"
+msgstr "Themen entdecken"
+
+#: front-page.php:103
+msgid "Browse"
+msgstr "Durchstöbern"
+
+#: front-page.php:103
+msgid "Explore by topic"
+msgstr "Nach Thema entdecken"
+
+#. translators: %d: number of stories
+#: front-page.php:113
+#, php-format
+msgid "%d story"
+msgid_plural "%d stories"
+msgstr[0] "%d Beitrag"
+msgstr[1] "%d Beiträge"
+
+#: front-page.php:136
+msgid "Fresh"
+msgstr "Neu"
+
+#: front-page.php:136
+msgid "Latest stories"
+msgstr "Neueste Beiträge"
+
+#: front-page.php:138
+msgid "See all stories →"
+msgstr "Alle Beiträge ansehen →"
+
+#: functions.php:64
+msgid "Primary Menu"
+msgstr "Hauptmenü"
+
+#: functions.php:65
+msgid "Footer Menu"
+msgstr "Footer-Menü"
+
+#: functions.php:258
+#: functions.php:626
+#: functions.php:767
+msgid "Home"
+msgstr "Startseite"
+
+#: functions.php:329
+msgid "Link copied"
+msgstr "Link kopiert"
+
+#: functions.php:330
+msgid "Copied"
+msgstr "Kopiert"
+
+#: functions.php:331
+msgid "Copy this link:"
+msgstr "Link kopieren:"
+
+#: functions.php:356
+msgid "Save"
+msgstr "Merken"
+
+#: functions.php:357
+msgid "Save this image to Pinterest"
+msgstr "Dieses Bild auf Pinterest merken"
+
+#: functions.php:507
+msgid "Image"
+msgstr "Bild"
+
+#: functions.php:554
+#: page.php:32
+msgid "Sidebar"
+msgstr "Seitenleiste"
+
+#: functions.php:554
+msgid "Shown beside single posts (sticky on desktop)."
+msgstr "Wird neben Einzelbeiträgen angezeigt (auf dem Desktop fixiert)."
+
+#: functions.php:555
+msgid "Header Ad"
+msgstr "Header-Anzeige"
+
+#: functions.php:555
+msgid "Full-width strip under the header, shown on posts, pages, and archives (not the front page, where the hero occupies that space). Fallback if the plugin Header zone is empty."
+msgstr "Ein Streifen in voller Breite unter dem Header, sichtbar auf Beiträgen, Seiten und Archiven (nicht auf der Startseite, wo der Hero-Bereich diesen Platz einnimmt). Fallback, falls die Header-Zone des Plugins leer ist."
+
+#. translators: %d: minutes
+#: functions.php:603
+#, php-format
+msgid "%d min read"
+msgid_plural "%d min read"
+msgstr[0] "%d Min. Lesezeit"
+msgstr[1] "%d Min. Lesezeit"
+
+#: functions.php:625
+msgid "Breadcrumb"
+msgstr "Breadcrumb"
+
+#: functions.php:637
+#: header.php:54
+#: searchform.php:14
+msgid "Search"
+msgstr "Suche"
+
+#: functions.php:739
+msgid "Share on Facebook"
+msgstr "Auf Facebook teilen"
+
+#: functions.php:740
+msgid "Share on WhatsApp"
+msgstr "Auf WhatsApp teilen"
+
+#: functions.php:741
+msgid "Share by email"
+msgstr "Per E-Mail teilen"
+
+#: functions.php:742
+msgid "Copy link"
+msgstr "Link kopieren"
+
+#: functions.php:743
+msgid "Print"
+msgstr "Drucken"
+
+#: functions.php:786
+msgid "Previous page"
+msgstr "Vorherige Seite"
+
+#: functions.php:787
+msgid "Next page"
+msgstr "Nächste Seite"
+
+#: functions.php:790
+msgid "Posts navigation"
+msgstr "Beitragsnavigation"
+
+#. translators: %d: number of hours
+#: functions.php:883
+#, php-format
+msgid "%d hr"
+msgid_plural "%d hr"
+msgstr[0] "%d Std."
+msgstr[1] "%d Std."
+
+#. translators: %d: number of minutes
+#: functions.php:885
+#, php-format
+msgid "%d min"
+msgid_plural "%d min"
+msgstr[0] "%d Min."
+msgstr[1] "%d Min."
+
+#. translators: %s: social network name (e.g. "Instagram")
+#: functions.php:987
+#, php-format
+msgid "%s URL"
+msgstr "%s-URL"
+
+#: functions.php:1010
+msgid "Author profiles"
+msgstr "Autorenprofile"
+
+#. translators: %s: social network name (e.g. "Facebook")
+#: functions.php:1059
+#, php-format
+msgid "Follow us on %s"
+msgstr "Folge uns auf %s"
+
+#: functions.php:1064
+#: inc/site-options.php:94
+msgid "Social profiles"
+msgstr "Social-Media-Profile"
+
+#: functions.php:1149
+msgid "Author photo"
+msgstr "Autorenfoto"
+
+#: functions.php:1151
+msgid "Photo (image URL or media ID)"
+msgstr "Foto (Bild-URL oder Medien-ID)"
+
+#: functions.php:1154
+msgid "Overrides the Gravatar. Paste an image URL or a Media Library attachment ID; leave blank for the default."
+msgstr "Überschreibt den Gravatar. Füge eine Bild-URL oder die ID eines Medienbibliothek-Anhangs ein; leer lassen für die Standardeinstellung."
+
+#: functions.php:1185
+msgid "Servings"
+msgstr "Portionen"
+
+#: functions.php:1186
+msgid "Prep"
+msgstr "Vorbereitung"
+
+#: functions.php:1187
+msgid "Cook"
+msgstr "Kochzeit"
+
+#: functions.php:1188
+msgid "Total"
+msgstr "Gesamt"
+
+#: functions.php:1203
+msgid "Ingredients"
+msgstr "Zutaten"
+
+#: functions.php:1213
+msgid "Instructions"
+msgstr "Zubereitung"
+
+#: functions.php:1241
+#: single.php:79
+msgid "Share this story"
+msgstr "Diesen Beitrag teilen"
+
+#: functions.php:1326
+msgid "Jump to section"
+msgstr "Zu Abschnitt springen"
+
+#: functions.php:1351
+msgid "Back to top"
+msgstr "Nach oben"
+
+#: header.php:23
+msgid "Skip to content"
+msgstr "Zum Inhalt springen"
+
+#: header.php:41
+msgid "Primary"
+msgstr "Hauptnavigation"
+
+#: header.php:59
+msgid "Menu"
+msgstr "Menü"
+
+#: inc/site-options.php:47
+msgid "Site options"
+msgstr "Website-Optionen"
+
+#: inc/site-options.php:48
+msgid "Presentation choices for this site. Changes preview live; nothing is saved until you click Publish."
+msgstr "Gestaltungsoptionen für diese Website. Änderungen werden live in der Vorschau angezeigt; nichts wird gespeichert, bis du auf Veröffentlichen klickst."
+
+#: inc/site-options.php:56
+msgid "What this site publishes"
+msgstr "Was diese Website veröffentlicht"
+
+#: inc/site-options.php:57
+msgid "Sets the word used in buttons and headings, e.g. \"Read the recipe\", \"Latest recipes\", \"12 recipes\"."
+msgstr "Legt das Wort fest, das in Buttons und Überschriften verwendet wird, z. B. „Rezept lesen“, „Neueste Rezepte“, „12 Rezepte“."
+
+#: inc/site-options.php:59
+msgid "Stories"
+msgstr "Beiträge"
+
+#: inc/site-options.php:60
+msgid "Recipes"
+msgstr "Rezepte"
+
+#: inc/site-options.php:61
+msgid "Articles"
+msgstr "Artikel"
+
+#: inc/site-options.php:69
+msgid "Homepage hero layout"
+msgstr "Hero-Layout der Startseite"
+
+#: inc/site-options.php:70
+msgid "Choose \"Photo above the headline\" when post images have text or collages printed on them, so the headline never sits on top of busy pictures."
+msgstr "Wähle „Foto über der Überschrift“, wenn deine Beitragsbilder Text oder Collagen enthalten, damit die Überschrift nie über einem unruhigen Bild sitzt."
+
+#: inc/site-options.php:72
+msgid "Headline over the photo"
+msgstr "Überschrift auf dem Foto"
+
+#: inc/site-options.php:73
+msgid "Photo above the headline"
+msgstr "Foto über der Überschrift"
+
+#: inc/site-options.php:81
+msgid "Photos on topic tiles"
+msgstr "Fotos auf Themen-Kacheln"
+
+#: inc/site-options.php:82
+msgid "When a category has no cover image of its own, its homepage tile uses the photo of its newest post instead of staying blank. (Category page headers stay plain, so their title is never printed over a busy photo.)"
+msgstr "Wenn eine Kategorie kein eigenes Titelbild hat, verwendet ihre Kachel auf der Startseite stattdessen das Foto ihres neuesten Beitrags, anstatt leer zu bleiben. (Die Kopfbereiche der Kategorieseiten bleiben schlicht, damit ihr Titel nie über einem unruhigen Foto steht.)"
+
+#: inc/site-options.php:89
+msgid "Show the author name and photo on posts"
+msgstr "Autorenname und -foto auf Beiträgen anzeigen"
+
+#: inc/site-options.php:90
+msgid "Untick for a brand-voice site: posts then show only the date and reading time under the title."
+msgstr "Entferne das Häkchen für eine Website mit einheitlicher Markenstimme: Beiträge zeigen dann nur noch Datum und Lesezeit unter dem Titel."
+
+#: inc/site-options.php:95
+msgid "This site's own pages on social networks. Each address you fill in shows as an icon in the footer, so readers can follow you. Leave a box empty to hide that network."
+msgstr "Die eigenen Profile dieser Website in sozialen Netzwerken. Jede Adresse, die du einträgst, erscheint als Icon im Footer, damit Leser dir folgen können. Lass ein Feld leer, um dieses Netzwerk auszublenden."
+
+#. translators: %s: social network name (e.g. "Facebook")
+#: inc/site-options.php:104
+#, php-format
+msgid "%s page address"
+msgstr "%s-Seitenadresse"
+
+#: index.php:42
+msgid "No posts yet"
+msgstr "Noch keine Beiträge"
+
+#: index.php:43
+msgid "There’s nothing here yet — check back soon."
+msgstr "Hier gibt's noch nichts — schau bald wieder vorbei."
+
+#. Template Name of the theme
+msgid "Full Width"
+msgstr "Volle Breite"
+
+#: page-full-width.php:31
+#: page.php:28
+#: single.php:96
+msgid "Pages:"
+msgstr "Seiten:"
+
+#. translators: %s: search query
+#: search.php:18
+#, php-format
+msgid "Search results for: %s"
+msgstr "Suchergebnisse für: %s"
+
+#. translators: %s: number of results
+#: search.php:25
+#, php-format
+msgid "%s result"
+msgid_plural "%s results"
+msgstr[0] "%s Ergebnis"
+msgstr[1] "%s Ergebnisse"
+
+#: search.php:38
+msgid "No results found"
+msgstr "Keine Ergebnisse gefunden"
+
+#: search.php:39
+msgid "We couldn’t find anything for that search. Try different keywords."
+msgstr "Wir konnten dazu nichts finden. Versuch es mit anderen Suchbegriffen."
+
+#: searchform.php:12
+msgid "Search for:"
+msgstr "Suche nach:"
+
+#: searchform.php:13
+msgid "Search…"
+msgstr "Suchen…"
+
+#. translators: %s: date
+#: single.php:50
+#, php-format
+msgid "Updated %s"
+msgstr "Aktualisiert am %s"
+
+#: single.php:106
+msgid "Article context"
+msgstr "Artikel-Kontext"
+
+#: single.php:121
+msgid "Written by"
+msgstr "Geschrieben von"
+
+#: single.php:125
+msgid "More stories by this author →"
+msgstr "Mehr Beiträge von diesem Autor →"
+
+#: single.php:135
+msgid "Keep reading"
+msgstr "Weiterlesen"
+
+#: single.php:161
+msgid "Post navigation"
+msgstr "Beitragsnavigation"
+
+#: single.php:164
+msgid "Previous"
+msgstr "Zurück"
+
+#: single.php:170
+msgid "Next"
+msgstr "Weiter"
+
+#: template-parts/sidebar.php:29
+msgid "Recent stories"
+msgstr "Aktuelle Beiträge"
+
+#: template-parts/sidebar.php:49
+msgid "Topics"
+msgstr "Themen"
+
+#: functions.php:335
+msgid "Advertisement"
+msgstr "Anzeige"
