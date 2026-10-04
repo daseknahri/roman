@@ -39,4 +39,6 @@ $WP plugin activate automation-hamri
 $WP plugin is-installed google-site-kit || $WP plugin install google-site-kit || log "site kit download failed (retried next start)"
 $WP plugin is-installed google-site-kit && $WP plugin activate google-site-kit
 $WP eval-file /opt/site/seed/seed.php && log "seed done"
+# Rebuild permalink rules after the seed (the plugin/theme activation can leave stale rules → post URLs 404).
+$WP rewrite flush --hard && log "rewrite rules flushed"
 chown -R www-data:www-data /var/www/html/wp-content/uploads 2>/dev/null || true
