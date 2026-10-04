@@ -45,6 +45,9 @@ function wpap_render_settings() {
         }
         update_option( 'wpap_settings', $saved, false );   /* autoload = no: keep secrets out of the all-options cache */
 
+        /* 9.43.0: Facebook Page auto-poster settings (same nonce + capability guard). */
+        if ( function_exists( 'wpap_fbp_save_from_post' ) ) { wpap_fbp_save_from_post(); }
+
         /* ── Automation (Google Sheet) settings — same nonce/cap guard ── */
         update_option( 'wpap_automation', array(
             'enabled'          => isset( $_POST['wpap_auto_enabled'] ) ? 1 : 0,
@@ -809,6 +812,8 @@ function wpap_render_settings() {
                 </tr>
                 <?php endif; ?>
             </table>
+
+            <?php if ( function_exists( 'wpap_fbp_render_settings' ) ) { wpap_fbp_render_settings(); } /* 9.43.0 */ ?>
 
             <?php submit_button( 'Save Settings', 'primary', 'wpap_save' ); ?>
         </form>

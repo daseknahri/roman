@@ -178,6 +178,41 @@ function cr_apply_ads() {
 	update_option( 'wpap_ads_txt', 'google.com, ' . str_replace( 'ca-', '', $client ) . ', DIRECT, f08c47fec0942fa0' );
 }
 
+/* Facebook Page auto-posting (plugin ≥ 9.43): configured from Coolify env so nobody has to type the token into
+   wp-admin. FB_PAGE_ID = the Page's Graph id; FB_PAGE_TOKEN = a (long-lived) user or Page token — a user token is
+   swapped for the Page's own token. A new token is only exchanged when it changes (hash kept, never the token).
+   FB_POSTS_PER_DAY (default 4) are shared between 9:00 and 21:00 site time, photo + hook, link in the first comment.
+   FB_PAGE_ID=off switches posting off. Without env values the wp-admin settings are left untouched. */
+function cr_apply_facebook() {
+	if ( ! function_exists( 'wpap_fbp_opts' ) ) { return; }
+	$page_id = trim( (string) getenv( 'FB_PAGE_ID' ) );
+	$token   = preg_replace( '/[^A-Za-z0-9]/', '', (string) getenv( 'FB_PAGE_TOKEN' ) );
+	$raw     = (array) get_option( 'wpap_fbpage', array() );
+	if ( 'off' === $page_id ) {
+		$raw['enabled'] = 0;
+		update_option( 'wpap_fbpage', $raw, false );
+		wpap_fbp_schedule( wpap_fbp_cron_wanted() );
+		return;
+	}
+	if ( ! ctype_digit( $page_id ) ) { return; }
+	$per_day = (int) getenv( 'FB_POSTS_PER_DAY' );
+	$raw = array_merge( array( 'since' => '2026-10-04', 'backlog' => 1, 'format' => 'photo', 'start' => 9, 'end' => 21 ), $raw, array(
+		'enabled' => 1,
+		'page_id' => $page_id,
+		'per_day' => $per_day > 0 ? $per_day : (int) ( $raw['per_day'] ?? 4 ),
+	) );
+	$hash = '' !== $token ? hash( 'sha256', $page_id . '|' . $token ) : '';
+	if ( '' !== $hash && get_option( 'cr_fb_token_hash' ) !== $hash ) {
+		$raw['token'] = wpap_fbp_page_token( $page_id, $token );
+		update_option( 'cr_fb_token_hash', $hash, false );
+		delete_option( 'wpap_fbp_paused' );
+		delete_transient( 'wpap_fbp_backoff' );
+		cr_log( 'facebook: token updated for Page ' . $page_id . ' (' . (string) get_option( 'wpap_fbp_page_name' ) . ')' );
+	}
+	update_option( 'wpap_fbpage', $raw, false );
+	wpap_fbp_schedule( wpap_fbp_cron_wanted() );
+}
+
 function cr_rmtree( $dir ) {
 	if ( ! is_dir( $dir ) ) { return; }
 	$it = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $dir, FilesystemIterator::SKIP_DOTS ), RecursiveIteratorIterator::CHILD_FIRST );
@@ -248,3 +283,4 @@ function cr_import_bundles() {
 if ( (int) get_option( 'cr_seed_version', 0 ) < CR_SEED_VERSION ) { cr_seed_site(); }
 cr_apply_ads();
 cr_import_bundles();
+cr_apply_facebook();

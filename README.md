@@ -9,7 +9,7 @@ fully set up on first start — no wp-admin clicks needed.
 - `wp-content/themes/crosetam` — brand child theme: Fraunces headings (self-hosted, Romanian diacritics), crochet
   palette, tutorial card (level / time / video creator), click-to-play YouTube facade + VideoObject schema,
   share (Facebook / WhatsApp / Pinterest) + next tutorial, sticky next-tutorial bar, dark mode
-- `wp-content/plugins/automation-hamri` — publishing/SEO/ads engine (vendored, v9.42.0)
+- `wp-content/plugins/automation-hamri` — publishing/SEO/ads engine + Facebook Page auto-poster (vendored, v9.43.0)
 - `data/bundles/*.zip` — article bundles (`posts.json` + `images/`), imported once each on start
 - `seed/seed.php` — brand, Romanian pages, categories, menus, AdSense Auto ads, import (idempotent, resumable)
 - `docker/site-init.sh` — waits for DB, syncs theme/plugin, installs WP + ro_RO once, runs the seed
@@ -24,3 +24,13 @@ Docker Compose build pack, domain on the `wordpress` service. Env vars generated
 `SERVICE_PASSWORD_WPADMIN`. Optional: `ADSENSE_CLIENT` (`off` disables ads), `WP_ADMIN_EMAIL`.
 
 Admin login: `/wp-admin`, user `redactia`, password = Coolify's `SERVICE_PASSWORD_WPADMIN`.
+
+## Facebook auto-posting
+Set in Coolify → Environment Variables, then Redeploy:
+- `FB_PAGE_ID` — the Page's Graph id (`off` stops posting)
+- `FB_PAGE_TOKEN` — a long-lived user token (Graph API Explorer → Access Token Debugger → Extend) with
+  `pages_manage_posts`, `pages_read_engagement`, `pages_show_list`; it is swapped for the Page's own token
+- `FB_POSTS_PER_DAY` — default 4, spread 9:00–21:00 (Bucharest time)
+
+Each article is shared once, oldest first: photo + its Facebook hook, link in the first comment.
+Status / test buttons: wp-admin → Automation Hamri → Settings → "Facebook Page posting".

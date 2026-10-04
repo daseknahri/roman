@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Automation Hamri
  * Description: An advanced AI-powered bulk content generator for WordPress that automates SEO articles, internal linking, and multi-engine image sourcing. Optimized for high-traffic niches.
- * Version:     9.42.0
+ * Version:     9.43.0
  * Requires at least: 5.8
  * Requires PHP: 7.4
  * Author:      Oussama Hamri
@@ -349,6 +349,7 @@ function wpap_deactivate( $network_wide = false ): void {
     delete_transient( WPAP_LICENSE_CACHE );
     /* Google-Sheet auto-publish: stop the recurring cron. */
     wp_clear_scheduled_hook( 'wpap_automation_cron' );
+    wp_clear_scheduled_hook( 'wpap_fbp_cron' );
 }
 
 /* ════════════════════════════════════════════
@@ -621,7 +622,7 @@ function wpap_bulk_max_items() {
     return (int) apply_filters( 'wpap_bulk_max_items', 300 );
 }
 
-define( 'WPAP_VERSION', '9.42.0' );
+define( 'WPAP_VERSION', '9.43.0' );
 define( 'WPAP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WPAP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'WPAP_TABLE',      'wpap_generated_posts' );
@@ -885,3 +886,4 @@ require_once __DIR__ . '/includes/seo-schema.php'; // Front-end SEO head, meta d
 require_once __DIR__ . '/includes/ads.php'; // ads.txt, IndexNow, ad zones (shortcode/block) + in-content injection
 require_once __DIR__ . '/includes/settings-io.php'; // Settings export/import + admin dashboard health widget
 require_once __DIR__ . '/includes/editor-tools.php'; // Gutenberg Author Tools — meta box + derived fields
+require_once __DIR__ . '/includes/facebook-page.php'; // 9.43.0: Facebook Page auto-poster (opt-in; pulls in facebook-page-admin.php)

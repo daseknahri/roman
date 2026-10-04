@@ -3,6 +3,19 @@
 Newest-first. build-v9 is the modular (`includes/*.php`), full-featured product that keeps its
 front-end (SEO/ads/recipe). See `readme.txt` for the WordPress-directory changelog.
 
+## 9.43.0
+
+**Facebook Page auto-poster, ported from build-final 8.86.** Opt-in (OFF by default): Settings -> "Facebook Page
+posting". Shares each new post to your Page as a photo with its Facebook hook as the caption, the link in the FIRST
+COMMENT (same text as the Distribution Hub), N/day spread across a time window, since-date queue, optional backlog,
+Graph v25.0. A pasted user token is swapped for the Page's own token; a token error pauses it, a rate limit backs off.
+
+### Added
+- `includes/facebook-page.php` + `includes/facebook-page-admin.php` (from build-final; Instagram/Pinterest hooks stay
+  `function_exists`-guarded and inert). Cron `wpap_fbp_cron` every 15 min (`wpap_15min`), cleared on deactivate.
+- Guarded ports: `wpap_apply_utm()` (reads the existing `wpap_utm` option) and `wpap_help_tip()` (hover help).
+- Settings page: panel rendered inside the main form; saved by the existing Save button.
+
 ## 9.42.0
 
 **Bulk ZIP Publish: in-article images from the zip.** Until now only the featured image came from the bundle;

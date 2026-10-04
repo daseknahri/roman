@@ -13,6 +13,9 @@ services:
       - WP_ADMIN_PASSWORD=$SERVICE_PASSWORD_WPADMIN
       - WP_ADMIN_EMAIL=${WP_ADMIN_EMAIL:-daseknahri@gmail.com}
       - ADSENSE_CLIENT=${ADSENSE_CLIENT:-ca-pub-6869205417923902}
+      - FB_PAGE_ID=${FB_PAGE_ID:-}
+      - FB_PAGE_TOKEN=${FB_PAGE_TOKEN:-}
+      - FB_POSTS_PER_DAY=${FB_POSTS_PER_DAY:-4}
     volumes:
       - wp-data:/var/www/html
     depends_on:
